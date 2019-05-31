@@ -1,0 +1,10 @@
+name: 7answerbot
+root: ~/src/answerbot
+
+on_project_start: if [ $(git rev-parse --abbrev-ref HEAD) == "master" ]; then git pl; fi
+
+startup_window: shell
+
+windows:
+  - server: pilot start answerbot
+  - shell:

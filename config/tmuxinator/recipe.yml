@@ -1,0 +1,23 @@
+name: 0recipe
+root: ~/Projects/web-apps/my_recipe_box
+
+on_project_start:
+  - if [ $(git rev-parse --abbrev-ref HEAD) == "master" ]; then git pl; fi
+  - docker-compose up -d
+
+on_project_stop:
+  - docker-compose down
+
+pre_window:
+  - nvm use
+
+startup_window: editor
+
+windows:
+  - server:
+      layout: even-horizontal
+      panes:
+        - mix phx.server
+        - ls
+  - editor: vim
+  - test:
