@@ -69,6 +69,7 @@ Plug 'slashmili/alchemist.vim'
 Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'alvan/vim-closetag'
 Plug 'mhinz/vim-mix-format'
+Plug 'AndrewRadev/ember_tools.vim'
 call plug#end()
 " }}}
 
@@ -371,49 +372,49 @@ let g:VimuxRunnerIndex = s:testWindowIndex."1"
 " Projectionist {{{
 let g:projectionist_heuristics = {
     \ 'package.json&.ember-cli.js' : {
-		\    'app/initializers/*.js': {
-		\      'type': 'initializer'
-		\    },
-		\    'app/models/*.js': {
-		\      'type': 'model',
-		\      'alternate': 'app/adapters/{}.js'
-		\    },
-		\    'app/adapters/*.js': {
-		\      'type': 'adapter',
-		\      'alternate': 'app/serializers/{}.js'
-		\    },
-		\    'app/serializers/*.js': {
-		\      'type': 'serializer',
-		\      'alternate': 'app/models/{}.js'
-		\    },
-		\    'app/services/*.js': {
-		\      'type': 'service'
-		\    },
-		\    'app/routes/*.js': {
-		\      'type': 'route',
-		\      'alternate': 'app/controllers/{}.js'
-		\    },
-		\    'app/controllers/*.js': {
-		\      'type': 'controller',
-		\      'alternate': 'app/templates/{}.hbs'
-		\    },
-		\    'app/templates/*.hbs': {
-		\      'type': 'template',
-		\      'alternate': 'app/routes/{}.js'
-		\    },
-		\    'app/components/*.js': {
-		\      'type': 'component',
-		\      'alternate': 'app/templates/components/{}.hbs'
-		\    },
-		\    'app/components/*/component.js': {
-		\      'type': 'component',
-		\      'alternate': 'app/components/{}/template.hbs'
-		\    },
-		\    'app/templates/components/*.hbs': {
-		\      'type': 'ctemplate',
-		\      'alternate': 'app/components/{}.js'
-		\    }
-		\  },
+    \    'app/initializers/*.js': {
+    \      'type': 'initializer'
+    \    },
+    \    'app/models/*.js': {
+    \      'type': 'model',
+    \      'alternate': 'app/adapters/{}.js'
+    \    },
+    \    'app/adapters/*.js': {
+    \      'type': 'adapter',
+    \      'alternate': 'app/serializers/{}.js'
+    \    },
+    \    'app/serializers/*.js': {
+    \      'type': 'serializer',
+    \      'alternate': 'app/models/{}.js'
+    \    },
+    \    'app/services/*.js': {
+    \      'type': 'service'
+    \    },
+    \    'app/routes/*.js': {
+    \      'type': 'route',
+    \      'alternate': 'app/controllers/{}.js'
+    \    },
+    \    'app/controllers/*.js': {
+    \      'type': 'controller',
+    \      'alternate': 'app/templates/{}.hbs'
+    \    },
+    \    'app/templates/*.hbs': {
+    \      'type': 'template',
+    \      'alternate': 'app/routes/{}.js'
+    \    },
+    \    'app/components/*.js': {
+    \      'type': 'component',
+    \      'alternate': 'app/templates/components/{}.hbs'
+    \    },
+    \    'app/components/*/component.js': {
+    \      'type': 'component',
+    \      'alternate': 'app/components/{}/template.hbs'
+    \    },
+    \    'app/templates/components/*.hbs': {
+    \      'type': 'ctemplate',
+    \      'alternate': 'app/components/{}.js'
+    \    }
+    \  },
     \ 'mix.exs': {
     \   'lib/*.ex': {
     \     'type':      'src',
@@ -458,7 +459,7 @@ let g:projectionist_heuristics = {
     \     'alternate': '{}.ts'
     \   }
     \ }
-		\ }
+    \ }
 " }}}
 
 " Mix format {{{
