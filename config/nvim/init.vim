@@ -32,6 +32,7 @@ Plug 'Valloric/ListToggle'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'benmills/vimux'
 Plug 'tpope/vim-projectionist'
+Plug 'scrooloose/nerdtree'
 
 " quick search
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -179,7 +180,7 @@ nnoremap <silent> <leader>sc :source $MYVIMRC<CR>
 nnoremap <S-u> <C-r>
 
 " open NERDTree and find the current file
-nnoremap <silent> <C-b> :Lexplore<CR>
+nnoremap <silent> <C-b> :call NERDTreeToggleInCurDir()<CR>
 
 " search accross all files
 " nnoremap <C-r> :Ack --ignore-dir={node_modules,tmp,var,log,vendor,dist,.git}<Space>""<Left>
@@ -226,6 +227,29 @@ let g:closetag_xhtml_filenames = '*.js,*.jsx'
 let g:closetag_xhtml_filetypes = 'javascript,javascript.jsx,jsx'
 " }}}
 
+" NERDTree {{{
+let g:NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr']
+let g:NERDTreeQuitOnOpen = 1
+let g:NERDTreeAutoDeleteBuffer = 1
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeDirArrows = 1
+let g:NERDTreeShowHidden = 1
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+function! NERDTreeToggleInCurDir()
+  " If NERDTree is open in the current buffer
+  if (exists('t:NERDTreeBufName') && bufwinnr(t:NERDTreeBufName) != -1)
+    exe ':NERDTreeClose'
+  else
+    if (expand('%:t') != '')
+      exe ':NERDTreeFind'
+    else
+      exe ':NERDTreeToggle'
+    endif
+  endif
+endfunction
+" }}}
+
 " Ale {{{
 let g:ale_open_list = 0
 let g:ale_fixers = {
@@ -264,6 +288,7 @@ call deoplete#custom#option({
 
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
 " }}}
 
 " CtrlF {{{
