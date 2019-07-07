@@ -1,7 +1,6 @@
 " Thomas Hourlier
 
 " Neovim {{{
-let g:loaded_node_provider = 0 " disable node extension support
 let g:loaded_ruby_provider = 0 " disable ruby extension support
 let g:python_host_prog = '/Users/thomashourlier/.pyenv/versions/neovim2/bin/python'
 let g:python3_host_prog = '/Users/thomashourlier/.pyenv/versions/neovim3/bin/python'
@@ -39,13 +38,10 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'dyng/ctrlsf.vim'
 
-" ide like
-Plug 'scrooloose/nerdtree'
-
 " tools for coding
 Plug 'w0rp/ale'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'ludovicchabant/vim-gutentags'
+Plug 'Shougo/denite.nvim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
@@ -61,15 +57,14 @@ Plug 'itchyny/lightline.vim'
 Plug 'flazz/vim-colorschemes'
 
 " language specific
-Plug 'sheerun/vim-polyglot', { 'tag': 'v3.7.0' }
+Plug 'sheerun/vim-polyglot'
 Plug 'janko-m/vim-test'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-endwise'
-Plug 'slashmili/alchemist.vim'
-Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'alvan/vim-closetag'
-Plug 'mhinz/vim-mix-format'
 Plug 'AndrewRadev/ember_tools.vim'
+Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
+Plug 'slashmili/alchemist.vim'
 call plug#end()
 " }}}
 
@@ -184,7 +179,7 @@ nnoremap <silent> <leader>sc :source $MYVIMRC<CR>
 nnoremap <S-u> <C-r>
 
 " open NERDTree and find the current file
-nnoremap <silent> <C-b> :call NERDTreeToggleInCurDir()<CR>
+nnoremap <silent> <C-b> :Lexplore<CR>
 
 " search accross all files
 " nnoremap <C-r> :Ack --ignore-dir={node_modules,tmp,var,log,vendor,dist,.git}<Space>""<Left>
@@ -204,6 +199,11 @@ nnoremap <silent> t<C-f> :TestFile<CR>
 nnoremap <silent> t<C-s> :TestSuite<CR>
 nnoremap <silent> t<C-l> :TestLast<CR>
 nnoremap <silent> t<C-g> :TestVisit<CR>
+
+" ale
+" for typescript go to definition
+noremap <Leader>] :ALEGoToDefinition<CR>
+
 " }}}
 
 " Plugin configurations {{{
@@ -218,9 +218,6 @@ let g:lightline.active.left = [ [ 'mode', 'paste' ], [ 'gitbranch', 'readonly', 
 let g:lightline.component_function = { 'gitbranch': 'fugitive#head' }
 " }}}
 
-" Polyglot {{{
-let g:polyglot_disabled = ['jsx']
-" }}}
 
 " Autoclose {{{
 let g:closetag_filenames = '*.html,*.js,*.jsx'
@@ -229,33 +226,10 @@ let g:closetag_xhtml_filenames = '*.js,*.jsx'
 let g:closetag_xhtml_filetypes = 'javascript,javascript.jsx,jsx'
 " }}}
 
-" NERDTree {{{
-let g:NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr']
-let g:NERDTreeQuitOnOpen = 1
-let g:NERDTreeAutoDeleteBuffer = 1
-let g:NERDTreeMinimalUI = 1
-let g:NERDTreeDirArrows = 1
-let g:NERDTreeShowHidden = 1
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
-function! NERDTreeToggleInCurDir()
-  " If NERDTree is open in the current buffer
-  if (exists('t:NERDTreeBufName') && bufwinnr(t:NERDTreeBufName) != -1)
-    exe ':NERDTreeClose'
-  else
-    if (expand('%:t') != '')
-      exe ':NERDTreeFind'
-    else
-      exe ':NERDTreeToggle'
-    endif
-  endif
-endfunction
-" }}}
-
 " Ale {{{
 let g:ale_open_list = 0
 let g:ale_fixers = {
-\    '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'javascript': ['eslint', 'prettier'],
 \   'typescript': ['eslint', 'prettier'],
 \   'json': ['prettier'],
@@ -264,7 +238,8 @@ let g:ale_fixers = {
 \   'scss': ['prettier'],
 \   'markdown': ['prettier'],
 \   'ruby': ['rubocop'],
-\   'terraform': ['terraform']
+\   'terraform': ['terraform'],
+\   'elixir': ['mix_format'],
 \}
 let g:ale_set_highlights = 0
 let g:ale_fix_on_save = 1
@@ -274,7 +249,21 @@ let g:ale_sign_style_error = 'x'
 let g:ale_sign_warning = '!'
 let g:ale_sign_style_warning = '!'
 let g:ale_sign_info = '?'
-let g:ale_elixir_credo_strict = 1
+let g:ale_completion_enabled = 0
+" }}}
+
+" Deoplete {{{
+let g:deoplete#enable_at_startup = 1
+
+call deoplete#custom#option({
+\ 'auto_complete_delay': 30,
+\ 'auto_refresh_delay': 30,
+\ 'max_list': 10,
+\ 'smart_case': v:true,
+\ })
+
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 " }}}
 
 " CtrlF {{{
@@ -294,10 +283,6 @@ let g:ctrlsf_mapping = {
 let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore={node_modules,tmp,var,log,vendor,dist,.git} -l -g ""'
 " }}}
 
-" Gutentags {{{
-let g:gutentags_ctags_tagfile = '.git/tags'
-" }}}
-
 " NERDCommenter {{{
 let g:NERDSpaceDelims = 1
 let g:NERDCompactSexyComs = 1
@@ -310,22 +295,9 @@ let g:NERDTrimTrailingWhitespace = 1
 autocmd QuickFixCmdPost *grep* cwindow
 " }}}
 
-" YouCompleteMe {{{
-" let g:ycm_auto_trigger = 1
-" let g:ycm_seed_identifiers_with_syntax = 1
-" let g:ycm_collect_identifiers_from_tags_files = 1
-" }}}
-
 " SuperTab {{{
 " let g:SuperTabDefaultCompletionType = 'context'
 " let g:SuperTabContextDefaultCompletionType = '<c-n>'
-" }}}
-
-" Deoplete {{{
-let g:deoplete#enable_at_startup = 1
-
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 " }}}
 
 " ListToggle {{{
@@ -463,7 +435,7 @@ let g:projectionist_heuristics = {
 " }}}
 
 " Mix format {{{
-let g:mix_format_on_save = 1
+" let g:mix_format_on_save = 1
 " }}}
 
 " }}}

@@ -1,8 +1,6 @@
 name: 0recipe-app
 root: ~/Projects/web-apps/my-recipe-box-app
 
-on_project_start: if [ $(git rev-parse --abbrev-ref HEAD) == "master" ]; then git pl; fi
-
 pre_window:
   - nvm use
 
