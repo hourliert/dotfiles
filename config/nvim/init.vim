@@ -1,6 +1,7 @@
 " Thomas Hourlier
 
 " Neovim {{{
+let g:loaded_node_provider = 0 " disable ruby extension support
 let g:loaded_ruby_provider = 0 " disable ruby extension support
 let g:python_host_prog = '/Users/thomashourlier/.pyenv/versions/neovim2/bin/python'
 let g:python3_host_prog = '/Users/thomashourlier/.pyenv/versions/neovim3/bin/python'
@@ -64,8 +65,9 @@ Plug 'tpope/vim-rails'
 Plug 'tpope/vim-endwise'
 Plug 'alvan/vim-closetag'
 Plug 'AndrewRadev/ember_tools.vim'
-Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
 Plug 'slashmili/alchemist.vim'
+Plug 'jparise/vim-graphql'
+
 call plug#end()
 " }}}
 
@@ -219,12 +221,11 @@ let g:lightline.active.left = [ [ 'mode', 'paste' ], [ 'gitbranch', 'readonly', 
 let g:lightline.component_function = { 'gitbranch': 'fugitive#head' }
 " }}}
 
-
 " Autoclose {{{
-let g:closetag_filenames = '*.html,*.js,*.jsx'
-let g:closetag_filetypes = 'html,javascript,javascript.jsx,jsx'
-let g:closetag_xhtml_filenames = '*.js,*.jsx'
-let g:closetag_xhtml_filetypes = 'javascript,javascript.jsx,jsx'
+let g:closetag_filenames = '*.html,*.js,*.jsx,*.ts,*.tsx'
+let g:closetag_filetypes = 'html,javascript,javascript.jsx,jsx,typescript,typescript.tsx'
+let g:closetag_xhtml_filenames = '*.js,*.jsx,*.ts,*.tsx'
+let g:closetag_xhtml_filetypes = 'javascript,javascript.jsx,jsx,typescript,typescript.tsx'
 " }}}
 
 " NERDTree {{{
@@ -256,6 +257,7 @@ let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'javascript': ['eslint', 'prettier'],
 \   'typescript': ['eslint', 'prettier'],
+\   'graphql': ['prettier'],
 \   'json': ['prettier'],
 \   'html': ['prettier'],
 \   'css': ['prettier'],
@@ -279,11 +281,12 @@ let g:ale_completion_enabled = 0
 " Deoplete {{{
 let g:deoplete#enable_at_startup = 1
 
+set completeopt-=preview
+
 call deoplete#custom#option({
 \ 'auto_complete_delay': 30,
 \ 'auto_refresh_delay': 30,
 \ 'max_list': 10,
-\ 'smart_case': v:true,
 \ })
 
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -459,8 +462,8 @@ let g:projectionist_heuristics = {
     \ }
 " }}}
 
-" Mix format {{{
-" let g:mix_format_on_save = 1
+" polyglot {{{
+let g:polyglot_disabled = []
 " }}}
 
 " }}}
