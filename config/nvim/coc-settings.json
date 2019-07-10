@@ -1,0 +1,18 @@
+{
+  "elixir.pathToElixirLS": "/Users/thomashourlier/.elixir-ls/language_server.sh",
+  "coc.preferences.formatOnSaveFiletypes": [
+    "javascript",
+    "typescript",
+    "typescriptreact",
+    "json",
+    "javascriptreact",
+    "css",
+    "scss",
+    "markdown",
+    "md",
+    "json",
+    "graphql"
+  ],
+   "suggest.maxCompleteItemCount": 20,
+   "diagnostic.displayByAle": true
+}

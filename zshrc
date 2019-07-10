@@ -124,3 +124,5 @@ export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools/bin
 export BINTRAY_USERNAME=thomas.hourlier@intercom
 export BINTRAY_KEY=416a0a2e324af6a0386b7a521dbe9682e0f15072
+export PATH="$HOME/.jenv/bin:$PATH"
+eval "$(jenv init -)"

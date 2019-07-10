@@ -1,7 +1,7 @@
 " Thomas Hourlier
 
 " Neovim {{{
-let g:loaded_node_provider = 0 " disable ruby extension support
+" let g:loaded_node_provider = 0 " disable ruby extension support
 let g:loaded_ruby_provider = 0 " disable ruby extension support
 let g:python_host_prog = '/Users/thomashourlier/.pyenv/versions/neovim2/bin/python'
 let g:python3_host_prog = '/Users/thomashourlier/.pyenv/versions/neovim3/bin/python'
@@ -21,6 +21,8 @@ set showtabline=0
 filetype on
 filetype plugin indent on
 xnoremap p pgvy
+set nobackup
+set nowritebackup
 " }}}
 
 " Plugins {{{
@@ -42,13 +44,12 @@ Plug 'dyng/ctrlsf.vim'
 
 " tools for coding
 Plug 'w0rp/ale'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'Shougo/denite.nvim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
 Plug 'danro/rename.vim'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " git
 Plug 'tpope/vim-fugitive'
@@ -65,7 +66,6 @@ Plug 'tpope/vim-rails'
 Plug 'tpope/vim-endwise'
 Plug 'alvan/vim-closetag'
 Plug 'AndrewRadev/ember_tools.vim'
-Plug 'slashmili/alchemist.vim'
 Plug 'jparise/vim-graphql'
 
 call plug#end()
@@ -152,13 +152,6 @@ nnoremap <silent> <leader>bh :new<CR>
 nnoremap <silent> <leader>bv :vnew<CR>
 " }}}
 
-" Tabs {{{
-nnoremap <silent> <Leader>t <esc>:tabnew<CR>
-nnoremap <silent> <Leader>t. <esc>:tabnext<CR>
-nnoremap <silent> <Leader>t, <esc>:tabprevious<CR>
-nnoremap <silent> <Leader>tw <esc>:tabclose<CR>
-" }}}
-
 " Windows {{{
 nnoremap <silent> + :resize +3<CR>
 nnoremap <silent> - :resize -3<CR>
@@ -203,10 +196,6 @@ nnoremap <silent> t<C-s> :TestSuite<CR>
 nnoremap <silent> t<C-l> :TestLast<CR>
 nnoremap <silent> t<C-g> :TestVisit<CR>
 
-" ale
-" for typescript go to definition
-noremap <Leader>] :ALEGoToDefinition<CR>
-
 " }}}
 
 " Plugin configurations {{{
@@ -229,7 +218,7 @@ let g:closetag_xhtml_filetypes = 'javascript,javascript.jsx,jsx,typescript,types
 " }}}
 
 " NERDTree {{{
-let g:NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr']
+let g:NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr', '.elixir_ls']
 let g:NERDTreeQuitOnOpen = 1
 let g:NERDTreeAutoDeleteBuffer = 1
 let g:NERDTreeMinimalUI = 1
@@ -255,14 +244,8 @@ endfunction
 let g:ale_open_list = 0
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'javascript': ['eslint', 'prettier'],
-\   'typescript': ['eslint', 'prettier'],
-\   'graphql': ['prettier'],
-\   'json': ['prettier'],
-\   'html': ['prettier'],
-\   'css': ['prettier'],
-\   'scss': ['prettier'],
-\   'markdown': ['prettier'],
+\   'javascript': ['eslint'],
+\   'typescript': ['eslint'],
 \   'ruby': ['rubocop'],
 \   'terraform': ['terraform'],
 \   'elixir': ['mix_format'],
@@ -278,19 +261,31 @@ let g:ale_sign_info = '?'
 let g:ale_completion_enabled = 0
 " }}}
 
-" Deoplete {{{
-let g:deoplete#enable_at_startup = 1
+" Coc.nvim {{{
 
-set completeopt-=preview
+" Use tab for trigger completion with characters ahead and navigate.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-call deoplete#custom#option({
-\ 'auto_complete_delay': 30,
-\ 'auto_refresh_delay': 30,
-\ 'max_list': 10,
-\ })
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Don't give message like 1 match out of 3 when auto completing
+set shortmess+=c
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)<Paste>
 
 " }}}
 
@@ -308,7 +303,7 @@ let g:ctrlsf_mapping = {
 " }}}
 
 " FZF {{{
-let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore={node_modules,tmp,var,log,vendor,dist,.git} -l -g ""'
+let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore={.elixir_ls,node_modules,tmp,var,log,vendor,dist,.git} -l -g ""'
 " }}}
 
 " NERDCommenter {{{
@@ -469,6 +464,5 @@ let g:polyglot_disabled = []
 " }}}
 
 " AutoGroups {{{
-autocmd Filetype ruby nnoremap <leader>ga :AV<cr>
 autocmd Filetype ruby nnoremap <leader>gr :RV<cr>
 " }}}
