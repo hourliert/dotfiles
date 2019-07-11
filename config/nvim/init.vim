@@ -198,6 +198,7 @@ nnoremap <silent> t<C-g> :TestVisit<CR>
 " }}}
 
 " Plugin configurations {{{
+
 " Lightline {{{
 let g:lightline = {}
 let g:lightline.colorscheme = 'powerline'
@@ -471,9 +472,6 @@ let g:mix_format_on_save = 1
 
 " Clipper {{{
 call clipper#set_invocation('nc localhost 8377')
-" }}}
-
->>>>>>> Linux settings
 " }}}
 
 " }}}
