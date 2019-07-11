@@ -1,18 +1,15 @@
 name: 3embercom
 root: ~/src/embercom
 
-on_project_start: if [ $(git rev-parse --abbrev-ref HEAD) == "master" ]; then git pl; fi
-
 startup_window: editor
+
+on_project_stop:
+  - pilot stop embercom
 
 pre_window:
   - nvm use
 
 windows:
-  - server:
-      layout: even-horizontal
-      panes:
-        - yarn && script/server
-        - git fetch
+  - server: pilot start embercom
   - editor: vim
   - test:

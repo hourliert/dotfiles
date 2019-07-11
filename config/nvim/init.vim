@@ -1,10 +1,9 @@
 " Thomas Hourlier
 
 " Neovim {{{
-" let g:loaded_node_provider = 0 " disable ruby extension support
 let g:loaded_ruby_provider = 0 " disable ruby extension support
-let g:python_host_prog = '/Users/thomashourlier/.pyenv/versions/neovim2/bin/python'
-let g:python3_host_prog = '/Users/thomashourlier/.pyenv/versions/neovim3/bin/python'
+let g:python_host_prog = '/home/thomas.hourlier/.pyenv/versions/neovim2/bin/python'
+let g:python6_host_prog = '/home/thomas.hourlier/.pyenv/versions/neovim3/bin/python'
 " }}}
 
 " General {{{
@@ -37,6 +36,7 @@ Plug 'benmills/vimux'
 Plug 'tpope/vim-projectionist'
 Plug 'scrooloose/nerdtree'
 Plug 'janko-m/vim-test'
+Plug 'wincent/vim-clipper'
 
 " quick search
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -348,9 +348,9 @@ endfunction
 let g:test#custom_strategies = {'TmuxWithStatusStrategy': function('TmuxWithStatusStrategy')}
 let g:test#strategy = 'TmuxWithStatusStrategy'
 let g:test#enabled_runners = ['ruby#rspec', 'javascript#jest', 'javascript#reactscripts', 'elixir#exunit']
-let g:test#filename_modifier = ':p'
+let g:test#filename_modifier = ':.'
 let test#javascript#reactscripts#executable = 'DEBUG=papinette.* ./node_modules/.bin/react-scripts test --watchAll=false'
-let test#ruby#rspec#executable = 'spring rspec'
+let test#ruby#rspec#executable = 'script/test -q'
 " }}}
 
 " vimux {{{
@@ -463,6 +463,17 @@ let g:projectionist_heuristics = {
 
 " polyglot {{{
 let g:polyglot_disabled = []
+" }}}
+
+" Mix format {{{
+let g:mix_format_on_save = 1
+" }}}
+
+" Clipper {{{
+call clipper#set_invocation('nc localhost 8377')
+" }}}
+
+>>>>>>> Linux settings
 " }}}
 
 " }}}

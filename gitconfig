@@ -28,5 +28,3 @@
   overview = log --all --since='1 weeks' --oneline --no-merges
   prr = !hub pull-request
   up = !git fetch origin && git rebase origin/master
-[protocol]
-	version = 2
