@@ -14,5 +14,8 @@
     "graphql"
   ],
    "suggest.maxCompleteItemCount": 20,
-   "diagnostic.displayByAle": true
+   "diagnostic.displayByAle": true,
+   "typescript.updateImportsOnFileMove.enable": false,
+   "javascript.updateImportsOnFileMove.enable": false,
+   "solargraph.commandPath": "/Users/thomashourlier/.rbenv/versions/2.5.5/bin/solargraph"
 }

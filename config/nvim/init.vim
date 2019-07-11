@@ -36,6 +36,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'benmills/vimux'
 Plug 'tpope/vim-projectionist'
 Plug 'scrooloose/nerdtree'
+Plug 'janko-m/vim-test'
 
 " quick search
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -61,8 +62,6 @@ Plug 'flazz/vim-colorschemes'
 
 " language specific
 Plug 'sheerun/vim-polyglot'
-Plug 'janko-m/vim-test'
-Plug 'tpope/vim-rails'
 Plug 'tpope/vim-endwise'
 Plug 'alvan/vim-closetag'
 Plug 'AndrewRadev/ember_tools.vim'
@@ -318,11 +317,6 @@ let g:NERDTrimTrailingWhitespace = 1
 autocmd QuickFixCmdPost *grep* cwindow
 " }}}
 
-" SuperTab {{{
-" let g:SuperTabDefaultCompletionType = 'context'
-" let g:SuperTabContextDefaultCompletionType = '<c-n>'
-" }}}
-
 " ListToggle {{{
 let g:lt_height = 7
 " }}}
@@ -453,6 +447,16 @@ let g:projectionist_heuristics = {
     \     'type': 'test',
     \     'alternate': '{}.ts'
     \   }
+    \ },
+    \ 'Gemfile': {
+    \   'app/lib/*.rb': {
+    \     'type':      'src',
+    \     'alternate': 'spec/lib/{}_spec.rb'
+    \   },
+    \   'spec/lib/*_spec.rb': {
+    \     'type':      'test',
+    \     'alternate': 'app/lib/{}.rb'
+    \   }
     \ }
     \ }
 " }}}
@@ -461,8 +465,4 @@ let g:projectionist_heuristics = {
 let g:polyglot_disabled = []
 " }}}
 
-" }}}
-
-" AutoGroups {{{
-autocmd Filetype ruby nnoremap <leader>gr :RV<cr>
 " }}}
