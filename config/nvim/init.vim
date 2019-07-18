@@ -48,7 +48,6 @@ Plug 'w0rp/ale'
 Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
-Plug 'danro/rename.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
@@ -246,7 +245,6 @@ let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'javascript': ['eslint'],
 \   'typescript': ['eslint'],
-\   'ruby': ['rubocop'],
 \   'terraform': ['terraform'],
 \   'elixir': ['mix_format'],
 \}
@@ -450,13 +448,13 @@ let g:projectionist_heuristics = {
     \   }
     \ },
     \ 'Gemfile': {
-    \   'app/lib/*.rb': {
+    \   'app/*.rb': {
     \     'type':      'src',
-    \     'alternate': 'spec/lib/{}_spec.rb'
+    \     'alternate': 'spec/{}_spec.rb'
     \   },
-    \   'spec/lib/*_spec.rb': {
+    \   'spec/*_spec.rb': {
     \     'type':      'test',
-    \     'alternate': 'app/lib/{}.rb'
+    \     'alternate': 'app/{}.rb'
     \   }
     \ }
     \ }
