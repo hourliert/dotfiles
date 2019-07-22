@@ -118,11 +118,7 @@ export AWS_DEFAULT_REGION="us-east-1"
 source $(which assume-role)
 export PATH=$HOME/.eshead/bin:$PATH
 alias cloud="sudo hammer workspace -u thomas.hourlier -L 80 -L 4200 -L 7357 -L 36629 -R 8377"
-export PATH="$HOME/.jenv/bin:$PATH"
-eval "$(jenv init -)"
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools/bin
-export BINTRAY_USERNAME=thomas.hourlier@intercom
-export BINTRAY_KEY=416a0a2e324af6a0386b7a521dbe9682e0f15072
 export PATH="$HOME/.jenv/bin:$PATH"
 eval "$(jenv init -)"

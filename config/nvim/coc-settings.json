@@ -13,7 +13,7 @@
     "json",
     "graphql"
   ],
-   "suggest.maxCompleteItemCount": 20,
+   "suggest.maxCompleteItemCount": 30,
    "diagnostic.displayByAle": true,
    "typescript.updateImportsOnFileMove.enable": false,
    "javascript.updateImportsOnFileMove.enable": false,

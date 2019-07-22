@@ -1,2 +1,3 @@
+tsserver.restart
 editor.action.organizeImport
 tsserver.openTsServerLog
