@@ -5,7 +5,7 @@ Installation
 ---
 
 * `brew tap thoughtbot/formulae`
-* `brew install rcup`
+* `brew install rcm`
 
 * Install iTerm2 and import settings: https://www.iterm2.com/
 * Install oh-my-zsh: https://github.com/robbyrussell/oh-my-zsh#basic-installation
