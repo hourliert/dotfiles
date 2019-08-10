@@ -75,15 +75,6 @@ export PATH="$PATH:$HOME/.mix/escripts"
 export MYVIMRC="$HOME/.config/nvim/init.vim"
 export EDITOR="nvim"
 
-# intercom
-export INTERCOM_USER=thomas.hourlier
-export PATH=$HOME/.pilot/bin:$PATH
-eval $(pilot env)
-export AWS_DEFAULT_REGION="us-east-1"
-source $(which assume-role)
-export PATH=$HOME/.eshead/bin:$PATH
-alias hammer='noglob hammer'
-
 # dart
 export PATH=~/.pub-cache/bin:$PATH
 
@@ -112,13 +103,13 @@ export EDITOR="nvim"
 
 # intercom
 export INTERCOM_USER=thomas.hourlier
-export PATH=$HOME/.pilot/bin:$PATH
-eval $(pilot env)
+alias hammer='noglob hammer'
 export AWS_DEFAULT_REGION="us-east-1"
 source $(which assume-role)
 export PATH=$HOME/.eshead/bin:$PATH
-alias cloud="sudo hammer workspace -u thomas.hourlier -L 80 -L 4200 -L 7357 -L 36629 -R 8377"
+alias cloud="hammer workspace -u thomas.hourlier"
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools/bin
 export PATH="$HOME/.jenv/bin:$PATH"
 eval "$(jenv init -)"
+source ~/.secretrc
