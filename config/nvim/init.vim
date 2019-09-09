@@ -22,6 +22,7 @@ filetype plugin indent on
 xnoremap p pgvy
 set nobackup
 set nowritebackup
+set pastetoggle=<F2>
 " }}}
 
 " Plugins {{{
@@ -60,6 +61,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'flazz/vim-colorschemes'
 
 " language specific
+Plug 'tpope/vim-rails'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-endwise'
 Plug 'alvan/vim-closetag'
@@ -240,13 +242,14 @@ endfunction
 " }}}
 
 " Ale {{{
+
 let g:ale_open_list = 0
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'javascript': ['eslint'],
 \   'typescript': ['eslint'],
+\   'ruby': ['rubocop'],
 \   'terraform': ['terraform'],
-\   'elixir': ['mix_format'],
 \}
 let g:ale_set_highlights = 0
 let g:ale_fix_on_save = 1
@@ -257,6 +260,7 @@ let g:ale_sign_warning = '!'
 let g:ale_sign_style_warning = '!'
 let g:ale_sign_info = '?'
 let g:ale_completion_enabled = 0
+let g:ale_ruby_rubocop_executable = "bundle"
 " }}}
 
 " Coc.nvim {{{
@@ -464,12 +468,8 @@ let g:projectionist_heuristics = {
 let g:polyglot_disabled = []
 " }}}
 
-" Mix format {{{
-let g:mix_format_on_save = 1
-" }}}
-
 " Clipper {{{
-call clipper#set_invocation('nc localhost 8377')
+call clipper#set_invocation('nc 10.0.0.2 8377')
 " }}}
 
 " }}}

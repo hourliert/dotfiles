@@ -6,7 +6,13 @@
       "ts",
       ":q",
       "qkj"
-    ]
+    ],
+    "%2Fhome%2Fthomas": {
+      "hourlier%2Fsrc%2Fintercom-translations": [
+        "prettier",
+        "pre"
+      ]
+    }
   },
   "lists": {
     "%2FUsers%2Fthomashourlier": [
@@ -17,7 +23,18 @@
     "%2FUsers%2Fthomashourlier%2FProjects%2Fweb-apps%2Fmy-recipe-box-app": [
       "comm",
       "di"
-    ]
+    ],
+    "%2Fhome%2Fthomas": {
+      "hourlier%2Fsrc%2Fintercom-translations": [
+        "ex"
+      ],
+      "hourlier%2Fsrc%2Fbilling": [
+        "comm"
+      ],
+      "hourlier": [
+        "ext"
+      ]
+    }
   },
   "commands": {
     "%2FUsers%2Fthomashourlier": [
@@ -26,7 +43,12 @@
     "%2FUsers%2Fthomashourlier%2FProjects%2Fweb-apps%2Fmy-recipe-box-app": [
       "organi",
       "serlog"
-    ]
+    ],
+    "%2Fhome%2Fthomas": {
+      "hourlier%2Fsrc%2Fbilling": [
+        "format"
+      ]
+    }
   },
   "diagnostics": {
     "%2FUsers%2Fthomashourlier%2FProjects%2Fweb-apps%2Fmy-recipe-box-app": [

@@ -1,13 +1,9 @@
 name: 5billing
 root: ~/src/billing
 
-on_project_start: if [ $(git rev-parse --abbrev-ref HEAD) == "master" ]; then git pl; fi
-
-on_project_stop:
-  - echo "Killing dangling process" && pkill -9 -f "puma.*\[billing\]"
-
 startup_window: shell
 
 windows:
   - server: script/update && script/server
-  - shell:
+  - editor: vim
+  - test:

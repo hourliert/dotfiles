@@ -36,6 +36,7 @@ eval $(pilot env)
 export AWS_DEFAULT_REGION="us-east-1"
 source $(which assume-role)
 export PATH=$HOME/.eshead/bin:$PATH
+alias hammer='noglob hammer'
 
 # alias
 alias vim="nvim"
@@ -43,6 +44,7 @@ alias vi="vim"
 alias v="vim"
 alias mux="tmuxinator"
 alias git="hub"
+alias g="git"
 
 # google cloud sql proxy
 export PATH="$HOME/.bin:$PATH"
@@ -86,15 +88,6 @@ export PATH="$PATH:$HOME/.mix/escripts"
 export MYVIMRC="$HOME/.config/nvim/init.vim"
 export EDITOR="nvim"
 
-# intercom
-export INTERCOM_USER=thomas.hourlier
-export PATH=$HOME/.pilot/bin:$PATH
-eval $(pilot env)
-export AWS_DEFAULT_REGION="us-east-1"
-source $(which assume-role)
-export PATH=$HOME/.eshead/bin:$PATH
-alias hammer='noglob hammer'
-
 # dart
 export PATH=~/.pub-cache/bin:$PATH
 
@@ -120,3 +113,5 @@ export PATH="$PATH:$HOME/.mix/escripts"
 # neovim
 export MYVIMRC="$HOME/.config/nvim/init.vim"
 export EDITOR="nvim"
+
+source ~/.secretrc
