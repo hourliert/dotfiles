@@ -1,5 +1,4 @@
 {
-  "elixir.pathToElixirLS": "/Users/thomashourlier/.elixir-ls/language_server.sh",
   "coc.preferences.formatOnSaveFiletypes": [
     "javascript",
     "typescript",
@@ -17,5 +16,15 @@
    "diagnostic.displayByAle": true,
    "typescript.updateImportsOnFileMove.enable": false,
    "javascript.updateImportsOnFileMove.enable": false,
-   "solargraph.commandPath": "/Users/thomashourlier/.rbenv/versions/2.5.5/bin/solargraph"
+   "languageserver": {
+     "elixirLS": {
+       "command": "/Users/thomashourlier/.elixir-ls/language_server.sh",
+       "filetypes": ["elixir", "eelixir"],
+       "settings": {
+         "elixirLS": {
+           "dialyzerEnabled": false
+         }
+       }
+     }
+   }
 }

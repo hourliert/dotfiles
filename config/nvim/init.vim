@@ -63,10 +63,12 @@ Plug 'flazz/vim-colorschemes'
 
 " language specific
 Plug 'sheerun/vim-polyglot'
+Plug 'tpope/vim-rails'
 Plug 'tpope/vim-endwise'
 Plug 'alvan/vim-closetag'
 Plug 'AndrewRadev/ember_tools.vim'
 Plug 'jparise/vim-graphql'
+Plug 'mhinz/vim-mix-format'
 
 call plug#end()
 " }}}
@@ -241,21 +243,6 @@ endfunction
 " }}}
 
 " Ale {{{
-
-let g:current_dir = getcwd()
-
-" Change working directory to directory where .formatter.exs exists, upwards.
-fun! ALE_BEFORE_mix_format(bufnr)
-	" find path of the .formatter.exs upwards from the current file
-	let path = fnamemodify(findfile(".formatter.exs", expand("%:p:h").";"), ":p:h")
-	exe 'lcd '. path
-endfu
-
-" Change working directory to directory of the current file
-fun! ALE_AFTER_mix_format(bufnr)
-	exe 'lcd '. g:current_dir
-endfu
-
 let g:ale_open_list = 0
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
@@ -263,7 +250,6 @@ let g:ale_fixers = {
 \   'typescript': ['eslint'],
 \   'ruby': ['rubocop'],
 \   'terraform': ['terraform'],
-\   'elixir': ['ALE_BEFORE_mix_format', 'mix_format', 'ALE_AFTER_mix_format'],
 \}
 let g:ale_set_highlights = 0
 let g:ale_fix_on_save = 1
@@ -365,7 +351,7 @@ let g:test#custom_strategies = {'TmuxWithStatusStrategy': function('TmuxWithStat
 let g:test#strategy = 'TmuxWithStatusStrategy'
 let g:test#enabled_runners = ['ruby#rspec', 'javascript#jest', 'javascript#reactscripts', 'elixir#exunit']
 let g:test#filename_modifier = ':p'
-let test#javascript#reactscripts#executable = 'DEBUG=papinette.* ./node_modules/.bin/react-app-rewired test --watchAll=false'
+let test#javascript#reactscripts#executable = 'DEBUG=papinette.* ./node_modules/.bin/react-scripts test --watchAll=false'
 let test#ruby#rspec#executable = 'spring rspec'
 " }}}
 
@@ -478,7 +464,12 @@ let g:projectionist_heuristics = {
 " }}}
 
 " polyglot {{{
-let g:polyglot_disabled = []
+let g:polyglot_disabled = ['jasmine']
+autocmd BufRead,BufNewFile *_spec.js set filetype=javascript
+" }}}
+
+" mix-format {{{
+let g:mix_format_on_save = 1
 " }}}
 
 " }}}
