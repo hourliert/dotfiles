@@ -23,6 +23,8 @@ xnoremap p pgvy
 set nobackup
 set nowritebackup
 set pastetoggle=<F2>
+set hidden
+set lazyredraw
 " }}}
 
 " Plugins {{{
@@ -112,8 +114,8 @@ set inccommand=nosplit
 " }}}
 
 " Folding {{{
-set foldmethod=marker   " fold based on marker " {{{  }}}
-set foldlevelstart=0    " start with fold level of 20
+set foldmethod=indent   " fold based on marker " {{{  }}}
+set foldlevelstart=20    " start with fold level of 20
 nnoremap <space> za
 " }}}
 

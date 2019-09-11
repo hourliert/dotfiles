@@ -1,5 +1,4 @@
 {
-  "elixir.pathToElixirLS": "/Users/thomashourlier/.elixir-ls/language_server.sh",
   "coc.preferences.formatOnSaveFiletypes": [
     "javascript",
     "typescript",
@@ -13,7 +12,8 @@
     "json",
     "graphql"
   ],
-  "suggest.maxCompleteItemCount": 5,
+  "suggest.maxCompleteItemCount": 100,
+  "suggest.autoTrigger": "always",
   "diagnostic.displayByAle": true,
   "typescript.updateImportsOnFileMove.enable": false,
   "javascript.updateImportsOnFileMove.enable": false,

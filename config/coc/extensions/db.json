@@ -1,7 +1,10 @@
 {
-  "lastUpdate": 1568015017064,
+  "lastUpdate": 1568188571813,
   "extension": {
     "coc-prettier": {
+      "disabled": false
+    },
+    "coc-json": {
       "disabled": false
     }
   }

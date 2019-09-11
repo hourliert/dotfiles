@@ -11,6 +11,10 @@
       "hourlier%2Fsrc%2Fintercom-translations": [
         "prettier",
         "pre"
+      ],
+      "hourlier%2Fsrc%2Fbilling": [
+        "json",
+        ":qa"
       ]
     }
   },
@@ -29,7 +33,10 @@
         "ex"
       ],
       "hourlier%2Fsrc%2Fbilling": [
-        "comm"
+        "comm",
+        "ext",
+        "exte",
+        "ex"
       ],
       "hourlier": [
         "ext"
