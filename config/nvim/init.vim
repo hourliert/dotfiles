@@ -24,7 +24,9 @@ set nobackup
 set nowritebackup
 set pastetoggle=<F2>
 set hidden
+set ttyfast
 set lazyredraw
+set re=1
 " }}}
 
 " Plugins {{{
@@ -63,7 +65,6 @@ Plug 'itchyny/lightline.vim'
 Plug 'flazz/vim-colorschemes'
 
 " language specific
-Plug 'tpope/vim-rails'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-endwise'
 Plug 'alvan/vim-closetag'

@@ -39,7 +39,11 @@
         "ex"
       ],
       "hourlier": [
-        "ext"
+        "ext",
+        "ex"
+      ],
+      "hourlier%2Fsrc%2Fintercom": [
+        "exte"
       ]
     }
   },
