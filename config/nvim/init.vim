@@ -399,14 +399,10 @@ let g:projectionist_heuristics = {
     \    },
     \    'app/components/*.js': {
     \      'type': 'component',
-    \      'alternate': 'app/templates/components/{}.hbs'
+    \      'alternate': 'app/components/{}.hbs'
     \    },
-    \    'app/components/*/component.js': {
+    \    'app/components/*.hbs': {
     \      'type': 'component',
-    \      'alternate': 'app/components/{}/template.hbs'
-    \    },
-    \    'app/templates/components/*.hbs': {
-    \      'type': 'ctemplate',
     \      'alternate': 'app/components/{}.js'
     \    }
     \  },

@@ -40,10 +40,14 @@
       ],
       "hourlier": [
         "ext",
-        "ex"
+        "ex",
+        "exe"
       ],
       "hourlier%2Fsrc%2Fintercom": [
         "exte"
+      ],
+      "hourlier%2Fsrc%2Fintercom-js": [
+        "ex"
       ]
     }
   },

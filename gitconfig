@@ -17,6 +17,7 @@
   aa = add --all
   ap = add --patch
 	cm = commit -m
+	ca = commit --amend
   cv = commit -v
   co = checkout
   d = diff -w

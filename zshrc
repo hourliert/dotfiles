@@ -7,6 +7,7 @@ zplug "lib/key-bindings", from:oh-my-zsh
 zplug "lib/directories", from:oh-my-zsh
 zplug "lib/completion", from:oh-my-zsh
 zplug "lib/theme-and-appearance", from:oh-my-zsh
+zplug "plugins/gitfast", from:oh-my-zsh
 zplug "zsh-users/zsh-syntax-highlighting", defer:3
 zplug "caiogondim/bullet-train.zsh", use:bullet-train.zsh-theme, defer:3
 
@@ -31,6 +32,7 @@ BULLETTRAIN_NVM_FG=black
 eval "$(intercom-profile)"
 export INTERCOM_USER=thomas.hourlier
 export INTERCOM_DEV_ENV=Linux
+export INTERCOM_PAPERCLIP_S3_ENABLED=true
 export PATH=$HOME/.pilot/bin:$PATH
 eval $(pilot env)
 export AWS_DEFAULT_REGION="us-east-1"
@@ -43,8 +45,11 @@ alias vim="nvim"
 alias vi="vim"
 alias v="vim"
 alias mux="tmuxinator"
-alias git="hub"
+function git(){hub $@}
+# alias git="hub"
 alias g="git"
+alias msm="mux start monitor"
+alias psi="pilot shell intercom"
 
 # google cloud sql proxy
 export PATH="$HOME/.bin:$PATH"
@@ -106,6 +111,9 @@ export PATH="$PATH:$GOPATH/bin"
 
 # elixir
 export PATH="$PATH:$HOME/.mix/escripts"
+
+# terraform
+export PATH="/home/linuxbrew/.linuxbrew/opt/terraform@0.11/bin:$PATH"
 
 # fzf: fuzzy search
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
