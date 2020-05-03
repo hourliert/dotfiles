@@ -351,7 +351,8 @@ let g:test#custom_strategies = {'TmuxWithStatusStrategy': function('TmuxWithStat
 let g:test#strategy = 'TmuxWithStatusStrategy'
 let g:test#enabled_runners = ['ruby#rspec', 'javascript#jest', 'javascript#reactscripts', 'elixir#exunit']
 let g:test#filename_modifier = ':p'
-let test#javascript#reactscripts#executable = 'DEBUG=papinette.* ./node_modules/.bin/react-scripts test --watchAll=false'
+let test#javascript#jest#executable = 'yarn test --watchAll=false'
+let test#javascript#reactscripts#executable = 'yarn test --watchAll=false'
 let test#ruby#rspec#executable = 'spring rspec'
 " }}}
 

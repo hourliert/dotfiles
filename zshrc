@@ -32,6 +32,9 @@ alias vi="vim"
 alias v="vim"
 alias mux="tmuxinator"
 alias git="hub"
+alias g="git"
+alias msm="mux start monitor"
+alias re="reset"
 
 # google cloud sql proxy
 export PATH="$HOME/.bin:$PATH"
@@ -53,13 +56,14 @@ alias rake='noglob rake'
 export PATH=~/.pub-cache/bin:$PATH
 
 # python
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-if [[ -n $VIRTUAL_ENV && -e "${VIRTUAL_ENV}/bin/activate" ]]; then
-  source "${VIRTUAL_ENV}/bin/activate"
-fi
+export PATH=~/opt/anaconda3/bin:$PATH
+# eval "$(pyenv init -)"
+# eval "$(pyenv virtualenv-init -)"
+# export PYENV_ROOT="$HOME/.pyenv"
+# export PATH="$PYENV_ROOT/bin:$PATH"
+# if [[ -n $VIRTUAL_ENV && -e "${VIRTUAL_ENV}/bin/activate" ]]; then
+  # source "${VIRTUAL_ENV}/bin/activate"
+# fi
 
 # go
 export GOPATH="$HOME/src/go"
@@ -107,9 +111,12 @@ alias hammer='noglob hammer'
 export AWS_DEFAULT_REGION="us-east-1"
 source $(which assume-role)
 export PATH=$HOME/.eshead/bin:$PATH
-alias cloud="hammer workspace -u thomas.hourlier"
+alias cde="hammer workspace -u thomas.hourlier"
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools/bin
 export PATH="$HOME/.jenv/bin:$PATH"
 eval "$(jenv init -)"
 source ~/.secretrc
+
+
+
