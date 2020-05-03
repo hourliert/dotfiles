@@ -33,12 +33,14 @@ eval "$(intercom-profile)"
 export INTERCOM_USER=thomas.hourlier
 export INTERCOM_DEV_ENV=Linux
 export INTERCOM_PAPERCLIP_S3_ENABLED=true
+export AWS_ACCOUNT_ROLE=team-operator
 export PATH=$HOME/.pilot/bin:$PATH
 eval $(pilot env)
 export AWS_DEFAULT_REGION="us-east-1"
 source $(which assume-role)
 export PATH=$HOME/.eshead/bin:$PATH
 alias hammer='noglob hammer'
+source ~/src/data-env/profile
 
 # alias
 alias vim="nvim"
@@ -123,3 +125,5 @@ export MYVIMRC="$HOME/.config/nvim/init.vim"
 export EDITOR="nvim"
 
 source ~/.secretrc
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

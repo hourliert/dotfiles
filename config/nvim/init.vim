@@ -43,6 +43,8 @@ Plug 'scrooloose/nerdtree'
 Plug 'janko-m/vim-test'
 Plug 'wincent/vim-clipper'
 
+Plug 'ChartaDev/charta.vim'
+
 " quick search
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -470,5 +472,12 @@ let g:polyglot_disabled = []
 " Clipper {{{
 call clipper#set_invocation('nc 10.0.0.2 8377')
 " }}}
+
+" Charta from Hugo {{{
+noremap <Leader>as :call Charta_set_current_tour()<CR>
+noremap <Leader>aa :call Charta_add_node()<CR>
+vnoremap <Leader>aa :<c-u>call Charta_add_node_visual()<CR>
+" }}}
+"
 
 " }}}
