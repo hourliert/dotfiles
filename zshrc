@@ -1,5 +1,5 @@
 # plugins
-export ZPLUG_HOME=$HOME/.zplug
+export ZPLUG_HOME=/opt/homebrew/opt/zplug
 source $ZPLUG_HOME/init.zsh
 setopt prompt_subst
 zplug "lib/key-bindings", from:oh-my-zsh
@@ -36,12 +36,6 @@ alias g="git"
 alias msm="mux start monitor"
 alias re="reset"
 
-# google cloud sql proxy
-export PATH="$HOME/.bin:$PATH"
-
-# google cloud sdk components
-export PATH="/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin:$PATH"
-
 # nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
@@ -52,36 +46,6 @@ export PATH="$(yarn global bin):$PATH"
 eval "$(rbenv init -)"
 alias rake='noglob rake'
 
-# dart
-export PATH=~/.pub-cache/bin:$PATH
-
-# python
-export PATH=~/opt/anaconda3/bin:$PATH
-# eval "$(pyenv init -)"
-# eval "$(pyenv virtualenv-init -)"
-# export PYENV_ROOT="$HOME/.pyenv"
-# export PATH="$PYENV_ROOT/bin:$PATH"
-# if [[ -n $VIRTUAL_ENV && -e "${VIRTUAL_ENV}/bin/activate" ]]; then
-  # source "${VIRTUAL_ENV}/bin/activate"
-# fi
-
-# go
-export GOPATH="$HOME/src/go"
-export PATH="$PATH:$GOPATH/bin"
-
-# elixir
-export PATH="$PATH:$HOME/.mix/escripts"
-
-# fzf: fuzzy search
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# neovim
-export MYVIMRC="$HOME/.config/nvim/init.vim"
-export EDITOR="nvim"
-
-# dart
-export PATH=~/.pub-cache/bin:$PATH
-
 # python
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
@@ -90,13 +54,6 @@ export PATH="$PYENV_ROOT/bin:$PATH"
 if [[ -n $VIRTUAL_ENV && -e "${VIRTUAL_ENV}/bin/activate" ]]; then
   source "${VIRTUAL_ENV}/bin/activate"
 fi
-
-# go
-export GOPATH="$HOME/src/go"
-export PATH="$PATH:$GOPATH/bin"
-
-# elixir
-export PATH="$PATH:$HOME/.mix/escripts"
 
 # fzf: fuzzy search
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -109,14 +66,6 @@ export EDITOR="nvim"
 export INTERCOM_USER=thomas.hourlier
 alias hammer='noglob hammer'
 export AWS_DEFAULT_REGION="us-east-1"
-source $(which assume-role)
-export PATH=$HOME/.eshead/bin:$PATH
 alias cde="hammer workspace -u thomas.hourlier"
-export ANDROID_HOME=$HOME/Library/Android/sdk
-export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools/bin
-export PATH="$HOME/.jenv/bin:$PATH"
-eval "$(jenv init -)"
+export HOMEBREW_GITHUB_API_TOKEN=$(cat ~/.intercom_github_api_token | tr -d '\n')
 source ~/.secretrc
-
-
-

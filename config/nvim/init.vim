@@ -465,8 +465,6 @@ let g:projectionist_heuristics = {
 " }}}
 
 " polyglot {{{
-let g:polyglot_disabled = ['jasmine']
-autocmd BufRead,BufNewFile *_spec.js set filetype=javascript
 " }}}
 
 " mix-format {{{
