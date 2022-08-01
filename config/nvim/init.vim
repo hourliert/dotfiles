@@ -3,7 +3,7 @@
 " Neovim {{{
 let g:loaded_ruby_provider = 0 " disable ruby extension support
 let g:python_host_prog = '/home/thomas.hourlier/.pyenv/versions/neovim2/bin/python'
-let g:python6_host_prog = '/home/thomas.hourlier/.pyenv/versions/neovim3/bin/python'
+let g:python3_host_prog = '/home/thomas.hourlier/.pyenv/versions/neovim3/bin/python'
 " }}}
 
 " General {{{
@@ -27,6 +27,9 @@ set hidden
 set ttyfast
 set lazyredraw
 set re=1
+" Disable old regexp engine for typescript files, this crashes polyglot + YATS
+autocmd BufRead,BufNewFile *.ts set re=0
+autocmd BufRead,BufNewFile *.tsx set re=0
 " }}}
 
 " Plugins {{{
@@ -37,13 +40,13 @@ Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-unimpaired'
 Plug 'Valloric/ListToggle'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'benmills/vimux'
+Plug 'benmills/vimux', { 'commit': '67bd945586f7739bf99a77202cc8da12fb7eb8be' }
 Plug 'tpope/vim-projectionist'
-Plug 'scrooloose/nerdtree'
+" Plug 'scrooloose/nerdtree'
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'kyazdani42/nvim-tree.lua'
 Plug 'janko-m/vim-test'
 Plug 'wincent/vim-clipper'
-
-Plug 'ChartaDev/charta.vim'
 
 " quick search
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -180,7 +183,9 @@ nnoremap <silent> <leader>sc :source $MYVIMRC<CR>
 nnoremap <S-u> <C-r>
 
 " open NERDTree and find the current file
-nnoremap <silent> <C-b> :call NERDTreeToggleInCurDir()<CR>
+" nnoremap <silent> <C-b> :call NERDTreeToggleInCurDir()<CR>
+nnoremap <silent> <C-b> :NvimTreeFindFileToggle<CR>
+
 
 " search accross all files
 " nnoremap <C-r> :Ack --ignore-dir={node_modules,tmp,var,log,vendor,dist,.git}<Space>""<Left>
@@ -223,27 +228,56 @@ let g:closetag_xhtml_filenames = '*.js,*.jsx,*.ts,*.tsx'
 let g:closetag_xhtml_filetypes = 'javascript,javascript.jsx,jsx,typescript,typescript.tsx'
 " }}}
 
-" NERDTree {{{
-let g:NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr', '.elixir_ls']
-let g:NERDTreeQuitOnOpen = 1
-let g:NERDTreeAutoDeleteBuffer = 1
-let g:NERDTreeMinimalUI = 1
-let g:NERDTreeDirArrows = 1
-let g:NERDTreeShowHidden = 1
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" nvim-tree {{{
+lua << EOF
+require("nvim-tree").setup({
+    sort_by = "case_sensitive",
+    view = {
+        adaptive_size = true,
+        mappings = {
+            list = {
+            },
+        },
+    },
+    renderer = {
+        group_empty = true,
+    },
+    filters = {
+    },
+    actions = {
+        open_file = {
+            quit_on_open = true,
+            window_picker = {
+                enable = false
+            },
+        },
+    },
+})
+EOF
 
-function! NERDTreeToggleInCurDir()
+" }}}
+
+" NERDTree {{{
+" let g:NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr', '.elixir_ls']
+" let g:NERDTreeQuitOnOpen = 1
+" let g:NERDTreeAutoDeleteBuffer = 1
+" let g:NERDTreeMinimalUI = 1
+" let g:NERDTreeDirArrows = 1
+" let g:NERDTreeShowHidden = 1
+" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" function! NERDTreeToggleInCurDir()
   " If NERDTree is open in the current buffer
-  if (exists('t:NERDTreeBufName') && bufwinnr(t:NERDTreeBufName) != -1)
-    exe ':NERDTreeClose'
-  else
-    if (expand('%:t') != '')
-      exe ':NERDTreeFind'
-    else
-      exe ':NERDTreeToggle'
-    endif
-  endif
-endfunction
+  " if (exists('t:NERDTreeBufName') && bufwinnr(t:NERDTreeBufName) != -1)
+    " exe ':NERDTreeClose'
+  " else
+    " if (expand('%:t') != '')
+      " exe ':NERDTreeFind'
+    " else
+      " exe ':NERDTreeToggle'
+    " endif
+  " endif
+" endfunction
 " }}}
 
 " Ale {{{
@@ -257,7 +291,7 @@ let g:ale_fixers = {
 \   'terraform': ['terraform'],
 \}
 let g:ale_set_highlights = 0
-let g:ale_fix_on_save = 1
+let g:ale_#fix_on_save = 1
 let g:ale_lint_delay = 1500
 let g:ale_sign_error = 'x'
 let g:ale_sign_style_error = 'x'
@@ -265,7 +299,7 @@ let g:ale_sign_warning = '!'
 let g:ale_sign_style_warning = '!'
 let g:ale_sign_info = '?'
 let g:ale_completion_enabled = 0
-let g:ale_ruby_rubocop_executable = "bundle"
+let g:ale_ruby_rubocop_executable = 'script/lint -q'
 " }}}
 
 " Coc.nvim {{{
@@ -357,13 +391,14 @@ let g:test#custom_strategies = {'TmuxWithStatusStrategy': function('TmuxWithStat
 let g:test#strategy = 'TmuxWithStatusStrategy'
 let g:test#enabled_runners = ['ruby#rspec', 'javascript#jest', 'javascript#reactscripts', 'elixir#exunit']
 let g:test#filename_modifier = ':.'
+let test#javascript#jest#executable = 'pilot exec intercom-js -- yarn jest'
 let test#javascript#reactscripts#executable = 'DEBUG=papinette.* ./node_modules/.bin/react-scripts test --watchAll=false'
 let test#ruby#rspec#executable = 'script/test -q'
 " }}}
 
 " vimux {{{
-let s:testWindowIndex = system("tmux list-windows -F '#{window_index} #{window_name}' | grep -m1 'test' | awk '{ print $1 }' | tr '\n' '.'")
-let g:VimuxRunnerIndex = s:testWindowIndex."1"
+let g:testWindowIndex = system("tmux list-windows -F '#{window_index} #{window_name}' | grep -m1 'test' | awk '{ print $1 }' | tr '\n' '.'")
+let g:VimuxRunnerIndex = g:testWindowIndex."1"
 " }}}
 
 " Projectionist {{{
@@ -466,7 +501,7 @@ let g:projectionist_heuristics = {
 " }}}
 
 " polyglot {{{
-let g:polyglot_disabled = []
+" let g:polyglot_disabled = []
 " }}}
 
 " Clipper {{{
@@ -474,10 +509,9 @@ call clipper#set_invocation('nc 10.0.0.2 8377')
 " }}}
 
 " Charta from Hugo {{{
-noremap <Leader>as :call Charta_set_current_tour()<CR>
-noremap <Leader>aa :call Charta_add_node()<CR>
-vnoremap <Leader>aa :<c-u>call Charta_add_node_visual()<CR>
+" let g:charta_api_token="SFMyNTY.g2gDdAAAAAFkAAd1c2VyX2lkYQJuBgCuNg5vcgFiAAFRgA.R-Q3CLKzz3qkaIaIIlNVsIbJlXCzc-ohb1f28qQgIW4"
+" nnoremap <Leader>aa :ChartaAddNode<CR>
+" vnoremap <Leader>aa :ChartaAddNode<CR>
 " }}}
-"
 
 " }}}

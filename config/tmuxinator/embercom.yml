@@ -10,6 +10,6 @@ pre_window:
   - nvm use
 
 windows:
-  - server: pilot start embercom
+  - server: pilot restart embercom
   - editor: vim
   - test:

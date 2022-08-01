@@ -10,6 +10,6 @@ on_project_stop:
 startup_window: editor
 
 windows:
-  - server: pilot start intercom-js
+  - server: pilot restart intercom-js
   - editor: vim
   - test:

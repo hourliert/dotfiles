@@ -15,6 +15,12 @@
       "hourlier%2Fsrc%2Fbilling": [
         "json",
         ":qa"
+      ],
+      "hourlier%2Fsrc%2Fembercom-prosemirror-composer": [
+        "kjkjkj"
+      ],
+      "hourlier%2Fsrc%2Fintercom": [
+        "q"
       ]
     }
   },
@@ -39,15 +45,19 @@
         "ex"
       ],
       "hourlier": [
-        "ext",
         "ex",
-        "exe"
+        "exe",
+        "ext"
       ],
       "hourlier%2Fsrc%2Fintercom": [
-        "exte"
+        "exte",
+        "ex"
       ],
       "hourlier%2Fsrc%2Fintercom-js": [
         "ex"
+      ],
+      "hourlier%2Fsrc%2Fembercom-prosemirror-composer": [
+        "ext"
       ]
     }
   },

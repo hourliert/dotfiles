@@ -7,7 +7,7 @@ on_project_stop:
 startup_window: editor
 
 windows:
-  - console: pilot start --no-log nexus-relay nexus-go
-  - server: pilot start intercom
+  - console: pilot restart --no-log nexus-relay nexus-go
+  - server: pilot restart intercom
   - editor: vim
   - test:

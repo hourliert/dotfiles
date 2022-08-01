@@ -1,29 +1,30 @@
-dotfiles
-===
+# dotfiles
 
-Installation
----
+## Installation
 
-* `brew tap thoughtbot/formulae`
-* `brew install rcup`
+- `brew tap thoughtbot/formulae`
+- `brew install rcup`
 
-* Install iTerm2 and import settings: https://www.iterm2.com/
-* Install oh-my-zsh: https://github.com/robbyrussell/oh-my-zsh#basic-installation
-* Install patched powerline fonts (fira code 12pt): https://github.com/powerline/fonts
-* Instal zplug: `brew install zplug`
-* Install neovim and dependencies: `brew install neovim node yarn zplug python python@2 pyenv pyenv-virtualenv rbenv ctags fzf`
-* Install nvm: https://github.com/creationix/nvm#install-script
-* Install TPM: https://github.com/tmux-plugins/tpm#installation
-* Install Vim-Plug: https://github.com/junegunn/vim-plug#installation
+- Install iTerm2 and import settings: https://www.iterm2.com/
+- Install oh-my-zsh: https://github.com/robbyrussell/oh-my-zsh#basic-installation
+- Install patched powerline fonts (fira code 12pt): https://github.com/powerline/fonts
+- Instal zplug: `brew install zplug`
+- Install neovim and dependencies: `brew install neovim node yarn zplug python python@2 pyenv pyenv-virtualenv rbenv ctags fzf`
+- Install nvm: https://github.com/creationix/nvm#install-script
+- Install TPM: https://github.com/tmux-plugins/tpm#installation
+- Install Vim-Plug: https://github.com/junegunn/vim-plug#installation
 
-Sync dotfiles
----
+## Sync dotfiles
 
-* `lsrc`
-* `rcup -v`
+- `lsrc`
+- `rcup -v`
 
+## Add more dotfiles
 
-Add more dotfiles
----
+- `mkrc .new_dot_file`
 
-* `mkrc .new_dot_file`
+## Rubocop daemon to speed up things
+
+- Install https://github.com/fohte/rubocop-daemon
+- Make sure the `NC` (in the bash script) is correct for your distro.
+- Override rubocop from rbenv: ln -fs /usr/local/bin/rubocop-daemon-wrapper \$HOME/.rbenv/versions/x.y.z/bin/rubocop

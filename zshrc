@@ -34,10 +34,9 @@ export INTERCOM_USER=thomas.hourlier
 export INTERCOM_DEV_ENV=Linux
 export INTERCOM_PAPERCLIP_S3_ENABLED=true
 export AWS_ACCOUNT_ROLE=team-operator
-export PATH=$HOME/.pilot/bin:$PATH
+export PATH=/home/linuxbrew/.linuxbrew/Cellar/pilot/2.9.1/bin:$PATH
 eval $(pilot env)
 export AWS_DEFAULT_REGION="us-east-1"
-source $(which assume-role)
 export PATH=$HOME/.eshead/bin:$PATH
 alias hammer='noglob hammer'
 source ~/src/data-env/profile
@@ -52,6 +51,8 @@ function git(){hub $@}
 alias g="git"
 alias msm="mux start monitor"
 alias psi="pilot shell intercom"
+alias psic="pilot exec intercom rails c"
+alias psip="pilot exec intercom pry-remote"
 
 # google cloud sql proxy
 export PATH="$HOME/.bin:$PATH"
@@ -68,6 +69,7 @@ export PATH="$(yarn global bin):$PATH"
 # ruby
 eval "$(rbenv init -)"
 alias rake='noglob rake'
+export PATH="/usr/local/bin/rubocop-daemon-wrapper:$PATH"
 
 # dart
 export PATH=~/.pub-cache/bin:$PATH
@@ -127,3 +129,9 @@ export EDITOR="nvim"
 source ~/.secretrc
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/thomas.hourlier/GCP/google-cloud-sdk/path.zsh.inc' ]; then . '/home/thomas.hourlier/GCP/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/thomas.hourlier/GCP/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/thomas.hourlier/GCP/google-cloud-sdk/completion.zsh.inc'; fi

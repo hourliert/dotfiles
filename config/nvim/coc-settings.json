@@ -2,17 +2,15 @@
   "coc.preferences.formatOnSaveFiletypes": [
     "javascript",
     "typescript",
-    "typescriptreact",
-    "json",
     "javascriptreact",
+    "typescriptreact",
     "css",
     "scss",
     "markdown",
     "md",
-    "json",
     "graphql"
   ],
-  "suggest.maxCompleteItemCount": 100,
+  "suggest.maxCompleteItemCount": 10,
   "suggest.autoTrigger": "always",
   "diagnostic.displayByAle": true,
   "typescript.updateImportsOnFileMove.enable": false,
@@ -20,6 +18,7 @@
   "tsserver.enableJavascript": false,
   "solargraph.completion": false,
   "solargraph.hover": false,
+  "solargraph.autoformat": false,
   "solargraph.formatting": false,
   "solargraph.diagnostics": false
 }
