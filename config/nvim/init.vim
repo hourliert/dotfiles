@@ -54,12 +54,13 @@ Plug 'junegunn/fzf.vim'
 Plug 'dyng/ctrlsf.vim'
 
 " tools for coding
-Plug 'w0rp/ale'
+" Plug 'w0rp/ale'
 Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'https://github.com/github/copilot.vim.git'
 
 " git
 Plug 'tpope/vim-fugitive'
@@ -281,25 +282,24 @@ EOF
 " }}}
 
 " Ale {{{
-
-let g:ale_open_list = 0
-let g:ale_fixers = {
-\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'javascript': ['eslint'],
-\   'typescript': ['eslint'],
-\   'ruby': ['rubocop'],
-\   'terraform': ['terraform'],
-\}
-let g:ale_set_highlights = 0
-let g:ale_#fix_on_save = 1
-let g:ale_lint_delay = 1500
-let g:ale_sign_error = 'x'
-let g:ale_sign_style_error = 'x'
-let g:ale_sign_warning = '!'
-let g:ale_sign_style_warning = '!'
-let g:ale_sign_info = '?'
-let g:ale_completion_enabled = 0
-let g:ale_ruby_rubocop_executable = 'script/lint -q'
+" let g:ale_open_list = 0
+" let g:ale_fixers = {
+" \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+" \   'javascript': ['eslint'],
+" \   'typescript': ['eslint'],
+" \   'ruby': ['rubocop'],
+" \   'terraform': ['terraform'],
+" \}
+" let g:ale_set_highlights = 0
+" let g:ale_#fix_on_save = 1
+" let g:ale_lint_delay = 1500
+" let g:ale_sign_error = 'x'
+" let g:ale_sign_style_error = 'x'
+" let g:ale_sign_warning = '!'
+" let g:ale_sign_style_warning = '!'
+" let g:ale_sign_info = '?'
+" let g:ale_completion_enabled = 0
+" let g:ale_ruby_rubocop_executable = 'script/lint -q'
 " }}}
 
 " Coc.nvim {{{

@@ -20,7 +20,7 @@
 	ca = commit --amend
   cv = commit -v
   co = checkout
-  d = diff -w
+	d = difftool
   p = push
   pl = pull
   ss = status
@@ -30,3 +30,7 @@
   overview = log --all --since='1 weeks' --oneline --no-merges
   prr = !hub pull-request
   up = !git fetch origin && git rebase origin/master
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = false

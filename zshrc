@@ -135,3 +135,5 @@ if [ -f '/home/thomas.hourlier/GCP/google-cloud-sdk/path.zsh.inc' ]; then . '/ho
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/thomas.hourlier/GCP/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/thomas.hourlier/GCP/google-cloud-sdk/completion.zsh.inc'; fi
+
+party-letters() { ruby -e 'puts ARGV.join(" ").split("").map { |c| "abcdefghijklmnopqrstuvwxyz".include?(c.downcase) ? ":party-letter-#{c.downcase}:" : c }.join("")' "$@" }
