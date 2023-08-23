@@ -109,7 +109,7 @@ font:
     #   - (macOS) Menlo
     #   - (Linux) monospace
     #   - (Windows) Consolas
-    family: "Fira Code"
+    family: "FiraCode Nerd Font"
 
     # The `style` can be specified to pick a specific face.
     style: Retina
@@ -120,7 +120,7 @@ font:
     #
     # If the bold family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: "Fira Code"
+    family: "FiraCode Nerd Font"
 
     # The `style` can be specified to pick a specific face.
     style: Bold
@@ -175,7 +175,7 @@ draw_bold_text_with_bright_colors: true
 colors:
   # Default colors
   primary:
-    background: '0x101321'
+    background: '0x101322'
     foreground: '0xfffaf5'
 
     # Bright and dim foreground colors
@@ -528,6 +528,7 @@ key_bindings:
   #- { key: W,      mods: Command,         action: Quit             }
   #- { key: F,      mods: Command|Control, action: ToggleFullscreen }
 
+  - { key: Key3,     mods: Alt,     chars: "\x23"                            }
   - { key: N,        mods: Command, command: { program: "open", args: ["-n", "/Applications/Alacritty.app"] } }
   - { key: Paste,                   action: Paste                            }
   - { key: Copy,                    action: Copy                             }

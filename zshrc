@@ -66,6 +66,25 @@ export EDITOR="nvim"
 export INTERCOM_USER=thomas.hourlier
 alias hammer='noglob hammer'
 export AWS_DEFAULT_REGION="us-east-1"
-alias cde="hammer workspace -u thomas.hourlier"
+alias cde="hammer workspace -u thomas.hourlier -r eu-west-2"
 export HOMEBREW_GITHUB_API_TOKEN=$(cat ~/.intercom_github_api_token | tr -d '\n')
 source ~/.secretrc
+
+# token with access to private intercom repositories
+export INTERCOM_GITHUB_API_TOKEN=$(cat /Users/thomashourlier/.intercom_github_api_token | tr -d '\n')
+export HONEYCOMB_DEVELOPMENT_KEY=d60bffd0094a09ed32d03904948b2e7c
+
+# Use Hammer for assume-role
+alias assume-role='function(){eval $(hammer assume-role $@);}'
+
+# Use Interstack v2 for Pilot
+export PILOT_USE_INTERSTACK_V2=true
+
+# initialize pilot environment variables
+eval $(pilot env)
+if [ -e ~/.pilot/stack/.pilot-env ]; then
+  source ~/.pilot/stack/.pilot-env
+fi
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+source /opt/homebrew/opt/asdf/libexec/asdf.sh

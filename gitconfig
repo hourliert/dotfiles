@@ -30,3 +30,5 @@
   up = !git fetch origin && git rebase origin/master
 [protocol]
 	version = 2
+[filter "strip-notebook-output"]
+	clean = jq '.cells |= map(if .\"cell_type\" == \"code\" then .outputs = [] | .execution_count = null | .metadata = {} else . end)'
