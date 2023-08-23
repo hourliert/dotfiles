@@ -60,7 +60,7 @@ Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'https://github.com/github/copilot.vim.git'
+Plug 'github/copilot.vim', {'branch': 'release'}
 
 " git
 Plug 'tpope/vim-fugitive'
@@ -182,6 +182,9 @@ nnoremap <silent> <leader>sc :source $MYVIMRC<CR>
 
 " remap redo to U
 nnoremap <S-u> <C-r>
+
+" map reopen last window
+nnoremap <silent> w<C-s> :vs#<CR>
 
 " open NERDTree and find the current file
 " nnoremap <silent> <C-b> :call NERDTreeToggleInCurDir()<CR>
