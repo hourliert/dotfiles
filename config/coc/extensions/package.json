@@ -5,9 +5,11 @@
     "coc-html": ">=1.2.4",
     "coc-yaml": ">=1.0.4",
     "coc-prettier": ">=1.1.14",
-    "coc-solargraph": ">=1.1.6",
-    "coc-tsserver": ">=1.5.1"
+    "coc-solargraph": ">=1.2.4",
+    "coc-tsserver": ">=1.5.1",
+    "coc-pyright": ">=1.1.337"
   },
   "disabled": [],
-  "locked": []
+  "locked": [],
+  "lastUpdate": 1692802359297
 }
