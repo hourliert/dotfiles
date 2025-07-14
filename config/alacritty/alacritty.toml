@@ -1,0 +1,39 @@
+[window]
+startup_mode = "Maximized"
+
+[font]
+normal = { family = "FiraCode Nerd Font", style = "Retina" }
+bold = { family = "FiraCode Nerd Font", style = "Bold" }
+size = 16.0
+
+# Colors (Tomorrow Night)
+# Default colors
+[colors.primary]
+background = '#101322'
+foreground = '#fffaf5'
+
+[colors.cursor]
+text = '#ffffff'
+cursor = '#ff261d'
+
+# Normal colors
+[colors.normal]
+black   = '#2e2e2e'
+red     = '#ff260d'
+green   = '#9ae204'
+yellow  = '#ffc400'
+blue    = '#00a1f9'
+magenta = '#805bb5'
+cyan    = '#00ddef'
+white   = '#feffff'
+
+# Bright colors
+[colors.bright]
+black   = '#555555'
+red     = '#ff4250'
+green   = '#b8e36d'
+yellow  = '#ffd852'
+blue    = '#00a5ff'
+magenta = '#ab7aef'
+cyan    = '#74fcf3'
+white   = '#feffff'

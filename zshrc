@@ -1,3 +1,10 @@
+# Add deno completions to search path
+if [[ ":$FPATH:" != *":/Users/thomashourlier/.zsh/completions:"* ]]; then export FPATH="/Users/thomashourlier/.zsh/completions:$FPATH"; fi
+# ZSH
+export ZSH="$HOME/.oh-my-zsh"
+source $ZSH/oh-my-zsh.sh
+export TERM=xterm-256color
+
 # plugins
 export ZPLUG_HOME=/opt/homebrew/opt/zplug
 source $ZPLUG_HOME/init.zsh
@@ -26,34 +33,14 @@ BULLETTRAIN_PROMPT_ORDER=(
 )
 BULLETTRAIN_NVM_FG=black
 
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 # alias
 alias vim="nvim"
 alias vi="vim"
-alias v="vim"
 alias mux="tmuxinator"
-alias git="hub"
-alias g="git"
 alias msm="mux start monitor"
 alias re="reset"
-
-# nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-export PATH="$(yarn global bin):$PATH"
-
-# ruby
-eval "$(rbenv init -)"
-alias rake='noglob rake'
-
-# python
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-if [[ -n $VIRTUAL_ENV && -e "${VIRTUAL_ENV}/bin/activate" ]]; then
-  source "${VIRTUAL_ENV}/bin/activate"
-fi
 
 # fzf: fuzzy search
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -62,29 +49,27 @@ fi
 export MYVIMRC="$HOME/.config/nvim/init.vim"
 export EDITOR="nvim"
 
-# intercom
-export INTERCOM_USER=thomas.hourlier
-alias hammer='noglob hammer'
-export AWS_DEFAULT_REGION="us-east-1"
-alias cde="hammer workspace -u thomas.hourlier -r eu-west-2"
-export HOMEBREW_GITHUB_API_TOKEN=$(cat ~/.intercom_github_api_token | tr -d '\n')
-source ~/.secretrc
+# nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
-# token with access to private intercom repositories
-export INTERCOM_GITHUB_API_TOKEN=$(cat /Users/thomashourlier/.intercom_github_api_token | tr -d '\n')
-export HONEYCOMB_DEVELOPMENT_KEY=d60bffd0094a09ed32d03904948b2e7c
+# ruby
+eval "$(rbenv init -)"
 
-# Use Hammer for assume-role
-alias assume-role='function(){eval $(hammer assume-role $@);}'
+# python
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
 
-# Use Interstack v2 for Pilot
-export PILOT_USE_INTERSTACK_V2=true
+export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
 
-# initialize pilot environment variables
-eval $(pilot env)
-if [ -e ~/.pilot/stack/.pilot-env ]; then
-  source ~/.pilot/stack/.pilot-env
-fi
+. "$HOME/.local/bin/env"
 
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-source /opt/homebrew/opt/asdf/libexec/asdf.sh
+alias claude="/Users/thomashourlier/.claude/local/claude"
+. "/Users/thomashourlier/.deno/env"
+# Initialize zsh completions (added by deno install script)
+autoload -Uz compinit
+compinit
