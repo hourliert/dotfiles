@@ -23,7 +23,7 @@ filetype plugin indent on
 xnoremap p pgvy
 set nobackup
 set nowritebackup
-set pastetoggle=<F2>
+" set pastetoggle=<F2>
 " }}}
 
 " Plugins {{{
