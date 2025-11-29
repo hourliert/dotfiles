@@ -23,8 +23,7 @@ filetype plugin indent on
 xnoremap p pgvy
 set nobackup
 set nowritebackup
-set pastetoggle=<F2>
-" }}}
+" }}
 
 " Plugins {{{
 call plug#begin('~/.local/share/nvim/plugged')
@@ -43,7 +42,7 @@ Plug 'janko-m/vim-test'
 Plug 'andrewradev/undoquit.vim'
 
 " quick search
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'dyng/ctrlsf.vim'
 
