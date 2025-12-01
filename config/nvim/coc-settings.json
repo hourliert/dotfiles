@@ -24,16 +24,5 @@
    "solargraph.hover": false,
    "solargraph.autoformat": false,
    "solargraph.formatting": false,
-   "solargraph.diagnostics": false,
-   "languageserver": {
-     "elixirLS": {
-       "command": "/Users/thomashourlier/.elixir-ls/language_server.sh",
-       "filetypes": ["elixir", "eelixir"],
-       "settings": {
-         "elixirLS": {
-           "dialyzerEnabled": false
-         }
-       }
-     }
-   }
+   "solargraph.diagnostics": false
 }

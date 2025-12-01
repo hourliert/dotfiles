@@ -66,6 +66,17 @@ export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 # ruby
 # eval "$(rbenv init -)"
 
+# go
+export PATH="$( go env GOPATH )/bin:$PATH"
+
+# android
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
+export PATH="$JAVA_HOME/bin:$PATH"
+export PATH="$ANDROID_HOME/cmdline-tools/latest/bin:$PATH"
+
 # python
 # export PYENV_ROOT="$HOME/.pyenv"
 # command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
@@ -82,3 +93,10 @@ export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 # Initialize zsh completions (added by deno install script)
 # autoload -Uz compinit
 # compinit
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/thomashourlier/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions
+
+source ~/.secretrc
