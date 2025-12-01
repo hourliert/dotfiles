@@ -21,7 +21,7 @@
   co = checkout
   d = diff -w
   p = push
-  pl = pull
+  pl = pull origin master
   s = stash
   sa = stash -u
   delete-merged-branches = !git branch --merged | grep -v 'master$' | xargs git branch -d

@@ -34,10 +34,13 @@ Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-unimpaired'
 Plug 'Valloric/ListToggle'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'benmills/vimux'
+Plug 'benmills/vimux', { 'commit': '67bd945586f7739bf99a77202cc8da12fb7eb8be' }
 Plug 'tpope/vim-projectionist'
-Plug 'scrooloose/nerdtree'
+" Plug 'scrooloose/nerdtree'
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'kyazdani42/nvim-tree.lua'
 Plug 'janko-m/vim-test'
+Plug 'andrewradev/undoquit.vim'
 
 " quick search
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -45,13 +48,14 @@ Plug 'junegunn/fzf.vim'
 Plug 'dyng/ctrlsf.vim'
 
 " tools for coding
-Plug 'w0rp/ale'
+" Plug 'w0rp/ale'
 Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
 Plug 'danro/rename.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'github/copilot.vim', {'branch': 'release'}
 
 " git
 Plug 'tpope/vim-fugitive'
@@ -114,8 +118,8 @@ set inccommand=nosplit
 " }}}
 
 " Folding {{{
-set foldmethod=marker   " fold based on marker " {{{  }}}
-set foldlevelstart=0    " start with fold level of 20
+set foldmethod=indent   " fold based on marker " {{{  }}}
+set foldlevelstart=20    " start with fold level of 20
 nnoremap <space> za
 " }}}
 
@@ -176,8 +180,12 @@ nnoremap <silent> <leader>sc :source $MYVIMRC<CR>
 " remap redo to U
 nnoremap <S-u> <C-r>
 
+" map reopen last window
+nnoremap <silent> w<C-s> :vs#<CR>
+
 " open NERDTree and find the current file
-nnoremap <silent> <C-b> :call NERDTreeToggleInCurDir()<CR>
+" nnoremap <silent> <C-b> :call NERDTreeToggleInCurDir()<CR>
+nnoremap <silent> <C-b> :NvimTreeFindFileToggle<CR>
 
 " search accross all files
 " nnoremap <C-r> :Ack --ignore-dir={node_modules,tmp,var,log,vendor,dist,.git}<Space>""<Left>
@@ -219,47 +227,71 @@ let g:closetag_xhtml_filenames = '*.js,*.jsx,*.ts,*.tsx'
 let g:closetag_xhtml_filetypes = 'javascript,javascript.jsx,jsx,typescript,typescript.tsx'
 " }}}
 
-" NERDTree {{{
-let g:NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr', '.elixir_ls']
-let g:NERDTreeQuitOnOpen = 1
-let g:NERDTreeAutoDeleteBuffer = 1
-let g:NERDTreeMinimalUI = 1
-let g:NERDTreeDirArrows = 1
-let g:NERDTreeShowHidden = 1
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" nvim-tree {{{
+lua << EOF
+require("nvim-tree").setup({
+    sort_by = "case_sensitive",
+    view = {
+        adaptive_size = true,
+    },
+    renderer = {
+        group_empty = true,
+    },
+    filters = {
+    },
+    actions = {
+        open_file = {
+            quit_on_open = true,
+            window_picker = {
+                enable = false
+            },
+        },
+    },
+})
+EOF
+" }}}
 
-function! NERDTreeToggleInCurDir()
-  " If NERDTree is open in the current buffer
-  if (exists('t:NERDTreeBufName') && bufwinnr(t:NERDTreeBufName) != -1)
-    exe ':NERDTreeClose'
-  else
-    if (expand('%:t') != '')
-      exe ':NERDTreeFind'
-    else
-      exe ':NERDTreeToggle'
-    endif
-  endif
-endfunction
+" NERDTree {{{
+" let g:NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr', '.elixir_ls']
+" let g:NERDTreeQuitOnOpen = 1
+" let g:NERDTreeAutoDeleteBuffer = 1
+" let g:NERDTreeMinimalUI = 1
+" let g:NERDTreeDirArrows = 1
+" let g:NERDTreeShowHidden = 1
+" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+"
+" function! NERDTreeToggleInCurDir()
+  "" If NERDTree is open in the current buffer
+  " if (exists('t:NERDTreeBufName') && bufwinnr(t:NERDTreeBufName) != -1)
+    " exe ':NERDTreeClose'
+  " else
+    " if (expand('%:t') != '')
+      " exe ':NERDTreeFind'
+    " else
+      " exe ':NERDTreeToggle'
+    " endif
+  " endif
+" endfunction
 " }}}
 
 " Ale {{{
-let g:ale_open_list = 0
-let g:ale_fixers = {
-\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'javascript': ['eslint'],
-\   'typescript': ['eslint'],
-\   'ruby': ['rubocop'],
-\   'terraform': ['terraform'],
-\}
-let g:ale_set_highlights = 0
-let g:ale_fix_on_save = 1
-let g:ale_lint_delay = 500
-let g:ale_sign_error = 'x'
-let g:ale_sign_style_error = 'x'
-let g:ale_sign_warning = '!'
-let g:ale_sign_style_warning = '!'
-let g:ale_sign_info = '?'
-let g:ale_completion_enabled = 0
+" let g:ale_open_list = 0
+" let g:ale_fixers = {
+" \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+" \   'javascript': ['eslint'],
+" \   'typescript': ['eslint'],
+" \   'ruby': ['rubocop'],
+" \   'terraform': ['terraform'],
+" \}
+" let g:ale_set_highlights = 0
+" let g:ale_fix_on_save = 1
+" let g:ale_lint_delay = 500
+" let g:ale_sign_error = 'x'
+" let g:ale_sign_style_error = 'x'
+" let g:ale_sign_warning = '!'
+" let g:ale_sign_style_warning = '!'
+" let g:ale_sign_info = '?'
+" let g:ale_completion_enabled = 0
 " }}}
 
 " Coc.nvim {{{
@@ -349,16 +381,17 @@ endfunction
 
 let g:test#custom_strategies = {'TmuxWithStatusStrategy': function('TmuxWithStatusStrategy')}
 let g:test#strategy = 'TmuxWithStatusStrategy'
-let g:test#enabled_runners = ['ruby#rspec', 'javascript#jest', 'javascript#reactscripts', 'elixir#exunit']
+let g:test#enabled_runners = ['ruby#rspec', 'javascript#jest', 'javascript#reactscripts', 'elixir#exunit', 'python#pytest']
 let g:test#filename_modifier = ':p'
 let test#javascript#jest#executable = 'yarn test --watchAll=false'
 let test#javascript#reactscripts#executable = 'yarn test --watchAll=false'
-let test#ruby#rspec#executable = 'spring rspec'
+let test#ruby#rspec#executable = 'script/test -q'
+let test#python#pytest#executable = 'script/test -q'
 " }}}
 
 " vimux {{{
-let s:testWindowIndex = system("tmux list-windows -F '#{window_index} #{window_name}' | grep -m1 'test' | awk '{ print $1 }' | tr '\n' '.'")
-let g:VimuxRunnerIndex = s:testWindowIndex."1"
+let g:testWindowIndex = system("tmux list-windows -F '#{window_index} #{window_name}' | grep -m1 'test' | awk '{ print $1 }' | tr '\n' '.'")
+let g:VimuxRunnerIndex = g:testWindowIndex."1"
 " }}}
 
 " Projectionist {{{
@@ -468,7 +501,7 @@ let g:projectionist_heuristics = {
 " }}}
 
 " mix-format {{{
-let g:mix_format_on_save = 1
+" let g:mix_format_on_save = 1
 " }}}
 
 " }}}

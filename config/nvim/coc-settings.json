@@ -2,16 +2,14 @@
   "coc.preferences.formatOnSaveFiletypes": [
     "javascript",
     "typescript",
-    "typescriptreact",
-    "json",
     "javascriptreact",
     "typescriptreact",
     "css",
     "scss",
     "markdown",
     "md",
+    "graphql",
     "json",
-    "graphql"
   ],
    "diagnostic.displayByAle": true,
    "typescript.updateImportsOnFileMove.enable": false,
