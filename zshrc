@@ -1,3 +1,16 @@
+# Add deno completions to search path
+if [[ ":$FPATH:" != *":/Users/thomashourlier/.zsh/completions:"* ]]; then export FPATH="/Users/thomashourlier/.zsh/completions:$FPATH"; fi
+# ZSH
+export ZSH="$HOME/.oh-my-zsh"
+source $ZSH/oh-my-zsh.sh
+export TERM=xterm-256color
+
+plugins=(
+  git
+  dotenv
+  asdf
+)
+
 # plugins
 export ZPLUG_HOME=/opt/homebrew/opt/zplug
 source $ZPLUG_HOME/init.zsh
@@ -26,29 +39,14 @@ BULLETTRAIN_PROMPT_ORDER=(
 )
 BULLETTRAIN_NVM_FG=black
 
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 # alias
 alias vim="nvim"
 alias vi="vim"
-alias v="vim"
 alias mux="tmuxinator"
-alias g="git"
 alias msm="mux start monitor"
 alias re="reset"
-
-export PATH="$(yarn global bin):$PATH"
-
-# ruby
-eval "$(rbenv init -)"
-alias rake='noglob rake'
-
-# python
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-if [[ -n $VIRTUAL_ENV && -e "${VIRTUAL_ENV}/bin/activate" ]]; then
-  source "${VIRTUAL_ENV}/bin/activate"
-fi
 
 # fzf: fuzzy search
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -57,73 +55,48 @@ fi
 export MYVIMRC="$HOME/.config/nvim/init.vim"
 export EDITOR="nvim"
 
-# intercom
-export INTERCOM_USER=thomas.hourlier
-alias hammer='noglob hammer'
-export AWS_DEFAULT_REGION="us-east-1"
-export HOMEBREW_GITHUB_API_TOKEN=$(cat ~/.intercom_github_api_token | tr -d '\n')
-source ~/.secretrc
-
-# token with access to private intercom repositories
-export INTERCOM_GITHUB_API_TOKEN=$(cat /Users/thomashourlier/.intercom_github_api_token | tr -d '\n')
-export HONEYCOMB_DEVELOPMENT_KEY=d60bffd0094a09ed32d03904948b2e7c
-
-# Use Hammer for assume-role
-alias assume-role='function(){eval $(hammer assume-role $@);}'
-
-# Use Interstack v2 for Pilot
-export PILOT_USE_INTERSTACK_V2=true
-
-# initialize pilot environment variables
-eval $(pilot env)
-if [ -e ~/.pilot/stack/.pilot-env ]; then
-  source ~/.pilot/stack/.pilot-env
-fi
-
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-
-. "$HOME/.local/bin/env"
-export OPENBLAS="/opt/homebrew/opt/openblas"
+# asdf
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 
 # nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+# [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
-autoload -U add-zsh-hook
-load-nvmrc() {
-  local nvmrc_path="$(nvm_find_nvmrc)"
-  if [ -n "$nvmrc_path" ]; then
-    local version="$(cat "${nvmrc_path}")"
-    if nvm ls "$version" &>/dev/null; then
-      nvm use --silent "$version"
-    else
-      nvm install --silent "$version"
-    fi
-  fi
-}
+# ruby
+# eval "$(rbenv init -)"
 
-add-zsh-hook chpwd load-nvmrc
-load-nvmrc
+# go
+export PATH="$( go env GOPATH )/bin:$PATH"
 
-# honeycomb observability development key
-export HONEYCOMB_DEVELOPMENT_KEY=$(cat /Users/thomashourlier/.intercom_honeycomb_api_token | tr -d '\n')
+# android
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
+export PATH="$JAVA_HOME/bin:$PATH"
+export PATH="$ANDROID_HOME/cmdline-tools/latest/bin:$PATH"
 
-# SSH Agent auto-start (added by ai-infra tool)
-if [ -z "$SSH_AUTH_SOCK" ]; then
-# Start ssh-agent and export variables
-eval "$(ssh-agent -s)" >/dev/null
+# python
+# export PYENV_ROOT="$HOME/.pyenv"
+# command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+# eval "$(pyenv init -)"
 
-# Add GitHub SSH key if it exists
-if [ -f ~/.ssh/id_ed25519 ]; then
-ssh-add ~/.ssh/id_ed25519 2>/dev/null
-fi
-fi
-export PATH=/Users/thomashourlier/.bin:$PATH
+# export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+# export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
+# export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
 
-alias claude="/Users/thomashourlier/.claude/local/claude"
+# . "$HOME/.local/bin/env"
 
-# added by answerbot
-export PYX_API_KEY="sk-pyx-uU0Yb4gUX6XeN8XiHSsga0x5uoDfG8j4EExgCSsDZaFNs6R9fv0rQavnhSt59QB1"
-# added by answerbot/script/bootstrap
-export PYX_API_KEY="sk-pyx-IXDuCKDiBBzgh0p86TtrD9NfDskFtxbu5PuaCVzXHG9gwdjMRX52hAcP2wI5suK1"
+# alias claude="/Users/thomashourlier/.claude/local/claude"
+# . "/Users/thomashourlier/.deno/env"
+# Initialize zsh completions (added by deno install script)
+# autoload -Uz compinit
+# compinit
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/thomashourlier/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions
+
+source ~/.secretrc
