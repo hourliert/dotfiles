@@ -10,4 +10,17 @@ return {
       -- Defaults already map <C-h/j/k/l>, so we don't need to add keymaps here.
     end,
   },
+  {
+    -- Disable K (LSP Hover) keymap so we can use it for scrolling
+    "neovim/nvim-lspconfig",
+    opts = {
+      servers = {
+        ["*"] = {
+          keys = {
+            { "K", false },
+          },
+        },
+      },
+    },
+  },
 }
