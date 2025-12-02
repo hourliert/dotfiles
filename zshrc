@@ -20,24 +20,11 @@ zplug "lib/directories", from:oh-my-zsh
 zplug "lib/completion", from:oh-my-zsh
 zplug "lib/theme-and-appearance", from:oh-my-zsh
 zplug "zsh-users/zsh-syntax-highlighting", defer:3
-zplug "caiogondim/bullet-train.zsh", use:bullet-train.zsh-theme, defer:3
+# starship prompt (configured in ~/.config/starship.toml)
 
 # start zplug
 zplug load
 
-# theme settings
-BULLETTRAIN_PROMPT_ORDER=(
-  time
-  status
-  custom
-  context
-  dir
-  ruby
-  nvm
-  git
-  cmd_exec_time
-)
-BULLETTRAIN_NVM_FG=black
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
@@ -100,3 +87,6 @@ compinit
 # End of Docker CLI completions
 
 source ~/.secretrc
+
+# starship prompt
+eval "$(starship init zsh)"

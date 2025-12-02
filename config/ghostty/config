@@ -1,0 +1,11 @@
+font-family = Fira Code
+font-style = Retina
+font-style-bold = Bold
+font-size = 16
+window-inherit-font-size = false
+maximize = true
+
+# Use Option as Alt for tmux/neovim
+macos-option-as-alt = true
+
+theme = Catppuccin Frappe
