@@ -34,3 +34,12 @@ map("n", "K", "<C-y>", { noremap = true, silent = true, desc = "Scroll up" })
 
 -- Remap LSP Hover to gh (since K is now scroll)
 map("n", "gh", vim.lsp.buf.hover, { desc = "LSP Hover" })
+
+-- Copy file paths to clipboard
+map("n", "<leader>fy", function()
+  vim.fn.setreg("+", vim.fn.expand("%:."))
+end, { desc = "Copy relative path" })
+
+map("n", "<leader>fY", function()
+  vim.fn.setreg("+", vim.fn.expand("%:p"))
+end, { desc = "Copy absolute path" })

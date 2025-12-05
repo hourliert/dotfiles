@@ -18,14 +18,26 @@ Installation
 Sync dotfiles
 ---
 
-* `lsrc`
-* `rcup -v`
+After cloning or making changes to dotfiles:
 
+```bash
+rcup -v
+```
+
+To preview what will be linked (dry run):
+
+```bash
+lsrc
+```
+
+**Note:** `rcup` creates new symlinks but won't remove stale ones. If you delete a file from `.dotfiles`, manually remove the broken symlink from `~`.
 
 Add more dotfiles
 ---
 
-* `mkrc .new_dot_file`
+```bash
+mkrc ~/.new_dot_file
+```
 
 Neovim Jupyter Notebook Support
 ---
