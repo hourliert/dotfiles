@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "WebSearch"
+      "WebSearch",
+      "WebFetch(domain:www.lazyvim.org)",
+      "Bash(rcup:*)"
     ],
     "deny": [],
     "ask": []

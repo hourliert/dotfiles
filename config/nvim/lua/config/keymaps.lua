@@ -13,7 +13,12 @@ map("n", "<C-\\>", "<cmd>TmuxNavigatePrevious<CR>", { silent = true, desc = "Tmu
 
 -- Ctrl-C: escape + close quickfix/location list + clear search highlight
 map({ "i", "v", "c" }, "<C-c>", "<Esc>", { desc = "Ctrl-C as Escape" })
-map("n", "<C-c>", "<cmd>cclose<CR><cmd>lclose<CR><cmd>nohlsearch<CR>", { silent = true, desc = "Close windows & clear highlight" })
+map(
+  "n",
+  "<C-c>",
+  "<cmd>cclose<CR><cmd>lclose<CR><cmd>nohlsearch<CR>",
+  { silent = true, desc = "Close windows & clear highlight" }
+)
 
 -- Fuzzy find files (like old Ctrl+P with FZF)
 map("n", "<C-p>", "<leader><Space>", { remap = true, desc = "Fuzzy find files" })
