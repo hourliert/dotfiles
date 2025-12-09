@@ -71,6 +71,19 @@
 | `gcc` | Toggle comment (line) |
 | `Tab` | Accept completion |
 | `Ctrl-n/p` | Next/prev completion |
+| `za` | Toggle fold |
+| `zM` / `zR` | Close/open all folds |
+
+## Testing
+
+| Key | Action |
+|-----|--------|
+| `<leader>tr` | Run nearest test |
+| `<leader>tt` | Run file |
+| `<leader>tl` | Run last |
+| `<leader>ts` | Toggle summary |
+| `:A` | Alternate file (test ↔ source) |
+| `:AV` | Alternate in vertical split |
 
 ## Misc
 
