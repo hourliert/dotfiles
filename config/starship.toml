@@ -4,8 +4,9 @@ palette = "catppuccin_frappe"
 format = """
 [](surface0)\
 $time\
+[](bg:mauve fg:surface0)\
 $hostname\
-[](bg:blue fg:surface0)\
+[](bg:blue fg:mauve)\
 $directory\
 [](fg:blue bg:lavender)\
 $git_branch\
@@ -28,8 +29,8 @@ format = '[ $time ]($style)'
 
 [hostname]
 ssh_only = true
-style = "bg:surface0 fg:mauve"
-format = '[ $hostname ]($style)'
+style = "bg:mauve fg:crust"
+format = '[$hostname ]($style)'
 
 [directory]
 style = "bg:blue fg:crust"
