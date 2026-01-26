@@ -5,7 +5,7 @@ font-size = 16
 window-inherit-font-size = false
 maximize = true
 
-# Use Option as Alt for tmux/neovim
-macos-option-as-alt = true
+# Use right Option as Alt for tmux/neovim, left Option for special characters (e.g., # with Opt+3)
+macos-option-as-alt = right
 
 theme = Catppuccin Frappe

@@ -73,7 +73,7 @@ export PATH="$ANDROID_HOME/cmdline-tools/latest/bin:$PATH"
 # export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
 # export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
 
-# . "$HOME/.local/bin/env"
+. "$HOME/.local/bin/env"
 
 # alias claude="/Users/thomashourlier/.claude/local/claude"
 # . "/Users/thomashourlier/.deno/env"
