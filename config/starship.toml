@@ -27,9 +27,9 @@ style = "bg:surface0 fg:text"
 format = '[ $time ]($style)'
 
 [hostname]
-ssh_only = false
+ssh_only = true
 style = "bg:surface0 fg:mauve"
-format = '[ $hostname]($style)'
+format = '[ $hostname ]($style)'
 
 [directory]
 style = "bg:blue fg:crust"
@@ -73,7 +73,7 @@ format = '[ $symbol ($version) ]($style)'
 
 [cmd_duration]
 min_time = 500
-format = "[ 󱎫 $duration]($style) "
+format = "[ 󱎫 $duration]($style)"
 style = "yellow"
 
 [character]
