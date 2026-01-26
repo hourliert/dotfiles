@@ -12,7 +12,8 @@ plugins=(
 )
 
 # plugins
-export ZPLUG_HOME=/opt/homebrew/opt/zplug
+export BREW_PREFIX="$( brew --prefix )"
+export ZPLUG_HOME="$BREW_PREFIX/opt/zplug"
 source $ZPLUG_HOME/init.zsh
 setopt prompt_subst
 zplug "lib/key-bindings", from:oh-my-zsh
@@ -26,7 +27,7 @@ zplug "zsh-users/zsh-syntax-highlighting", defer:3
 zplug load
 
 
-eval "$(/opt/homebrew/bin/brew shellenv)"
+eval "$($BREW_PREFIX/bin/brew shellenv)"
 
 # alias
 alias vim="nvim"
