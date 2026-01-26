@@ -18,7 +18,6 @@ elif [[ -f /home/linuxbrew/.linuxbrew/bin/brew ]]; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
-
 # plugins
 export BREW_PREFIX="$( brew --prefix )"
 export ZPLUG_HOME="$BREW_PREFIX/opt/zplug"
@@ -91,6 +90,13 @@ fpath=(/Users/thomashourlier/.docker/completions $fpath)
 autoload -Uz compinit
 compinit
 # End of Docker CLI completions
+
+# Start ssh-agent if not running (Linux only)
+if [[ "$(uname)" == "Linux" ]]; then
+    if [ -z "$SSH_AUTH_SOCK" ]; then
+        eval "$(ssh-agent -s)" > /dev/null
+    fi
+fi
 
 source ~/.secretrc
 
