@@ -100,5 +100,8 @@ fi
 
 source ~/.secretrc
 
+# Machine-specific config (create ~/.localrc on each machine)
+[[ -f ~/.localrc ]] && source ~/.localrc
+
 # starship prompt
 eval "$(starship init zsh)"
