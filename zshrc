@@ -11,6 +11,14 @@ plugins=(
   asdf
 )
 
+# Bootstrap Homebrew first (check known locations)
+if [[ -f /opt/homebrew/bin/brew ]]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [[ -f /home/linuxbrew/.linuxbrew/bin/brew ]]; then
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
+
+
 # plugins
 export BREW_PREFIX="$( brew --prefix )"
 export ZPLUG_HOME="$BREW_PREFIX/opt/zplug"
