@@ -26,9 +26,6 @@ zplug "zsh-users/zsh-syntax-highlighting", defer:3
 # start zplug
 zplug load
 
-
-eval "$($BREW_PREFIX/bin/brew shellenv)"
-
 # alias
 alias vim="nvim"
 alias vi="vim"
