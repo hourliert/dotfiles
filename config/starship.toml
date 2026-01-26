@@ -4,6 +4,7 @@ palette = "catppuccin_frappe"
 format = """
 [](surface0)\
 $time\
+$hostname\
 [](bg:blue fg:surface0)\
 $directory\
 [](fg:blue bg:lavender)\
@@ -16,6 +17,7 @@ $golang\
 $rust\
 $python\
 [](fg:surface0)\
+$cmd_duration\
 $character"""
 
 [time]
@@ -23,6 +25,11 @@ disabled = false
 time_format = "%R"
 style = "bg:surface0 fg:text"
 format = '[ $time ]($style)'
+
+[hostname]
+ssh_only = false
+style = "bg:surface0 fg:mauve"
+format = '[ $hostname]($style)'
 
 [directory]
 style = "bg:blue fg:crust"
@@ -63,6 +70,11 @@ format = '[ $symbol ($version) ]($style)'
 symbol = ""
 style = "bg:surface0 fg:yellow"
 format = '[ $symbol ($version) ]($style)'
+
+[cmd_duration]
+min_time = 500
+format = "[ 󱎫 $duration]($style) "
+style = "yellow"
 
 [character]
 success_symbol = " [](green)"
