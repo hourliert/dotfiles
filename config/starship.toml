@@ -30,7 +30,7 @@ format = '[ $time ]($style)'
 [hostname]
 ssh_only = true
 style = "bg:mauve fg:crust"
-format = '[$hostname ]($style)'
+format = '[ $hostname ]($style)'
 
 [directory]
 style = "bg:blue fg:crust"
