@@ -1,5 +1,7 @@
 # Add deno completions to search path
-if [[ ":$FPATH:" != *":/Users/thomashourlier/.zsh/completions:"* ]]; then export FPATH="/Users/thomashourlier/.zsh/completions:$FPATH"; fi
+if [[ -d "$HOME/.zsh/completions" ]] && [[ ":$FPATH:" != *":$HOME/.zsh/completions:"* ]]; then
+  export FPATH="$HOME/.zsh/completions:$FPATH"
+fi
 # ZSH
 export ZSH="$HOME/.oh-my-zsh"
 source $ZSH/oh-my-zsh.sh
@@ -56,18 +58,22 @@ export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 # [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 # ruby
-eval "$(rbenv init -)"
+if command -v rbenv &>/dev/null; then
+  eval "$(rbenv init -)"
+fi
 
 # go
 # export PATH="$( go env GOPATH )/bin:$PATH"
 
-# android
-export ANDROID_HOME=$HOME/Library/Android/sdk
-export PATH=$PATH:$ANDROID_HOME/emulator
-export PATH=$PATH:$ANDROID_HOME/platform-tools
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
-export PATH="$JAVA_HOME/bin:$PATH"
-export PATH="$ANDROID_HOME/cmdline-tools/latest/bin:$PATH"
+# android (macOS only)
+if [[ "$(uname)" == "Darwin" ]]; then
+  export ANDROID_HOME=$HOME/Library/Android/sdk
+  export PATH=$PATH:$ANDROID_HOME/emulator
+  export PATH=$PATH:$ANDROID_HOME/platform-tools
+  export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
+  export PATH="$JAVA_HOME/bin:$PATH"
+  export PATH="$ANDROID_HOME/cmdline-tools/latest/bin:$PATH"
+fi
 
 # python
 # export PYENV_ROOT="$HOME/.pyenv"
@@ -85,11 +91,12 @@ export PATH="$ANDROID_HOME/cmdline-tools/latest/bin:$PATH"
 # Initialize zsh completions (added by deno install script)
 # autoload -Uz compinit
 # compinit
-# The following lines have been added by Docker Desktop to enable Docker CLI completions.
-fpath=(/Users/thomashourlier/.docker/completions $fpath)
+# Docker CLI completions
+if [[ -d "$HOME/.docker/completions" ]]; then
+  fpath=("$HOME/.docker/completions" $fpath)
+fi
 autoload -Uz compinit
 compinit
-# End of Docker CLI completions
 
 # Start ssh-agent if not running (Linux only)
 if [[ "$(uname)" == "Linux" ]]; then
@@ -98,15 +105,21 @@ if [[ "$(uname)" == "Linux" ]]; then
     fi
 fi
 
-source ~/.secretrc
+[[ -f ~/.secretrc ]] && source ~/.secretrc
 
 # Machine-specific config (create ~/.localrc on each machine)
 [[ -f ~/.localrc ]] && source ~/.localrc
 
 # starship prompt
-eval "$(starship init zsh)"
-export MISE_ENV=macos # loads mise.macos.toml
-eval "$(mise activate zsh)"
+if command -v starship &>/dev/null; then
+  eval "$(starship init zsh)"
+fi
+
+# mise
+if command -v mise &>/dev/null; then
+  [[ "$(uname)" == "Darwin" ]] && export MISE_ENV=macos
+  eval "$(mise activate zsh)"
+fi
 export PKG_CONFIG_PATH="/opt/homebrew/opt/zlib/lib/pkgconfig:/usr/local/opt/zlib/lib/pkgconfig:$PKG_CONFIG_PATH"
 export PKG_CONFIG_PATH="/opt/homebrew/opt/openssl@3/lib/pkgconfig:/usr/local/opt/openssl@3/lib/pkgconfig:$PKG_CONFIG_PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
@@ -116,16 +129,21 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 
 # pnpm
-export PNPM_HOME="/Users/thourlier/Library/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
-
-# bun completions
-[ -s "/Users/thourlier/.bun/_bun" ] && source "/Users/thourlier/.bun/_bun"
+if [[ "$(uname)" == "Darwin" ]]; then
+  export PNPM_HOME="$HOME/Library/pnpm"
+else
+  export PNPM_HOME="$HOME/.local/share/pnpm"
+fi
+if [[ -d "$PNPM_HOME" ]]; then
+  case ":$PATH:" in
+    *":$PNPM_HOME:"*) ;;
+    *) export PATH="$PNPM_HOME:$PATH" ;;
+  esac
+fi
 
 # bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
+if [[ -d "$HOME/.bun" ]]; then
+  [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+  export BUN_INSTALL="$HOME/.bun"
+  export PATH="$BUN_INSTALL/bin:$PATH"
+fi

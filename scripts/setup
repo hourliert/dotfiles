@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Idempotent setup script for dotfiles on a Figma devbox (Ubuntu/Linuxbrew).
+# Called by the devbox hook on every start: bash scripts/setup
+
+DOTFILES_DIR="$HOME/dotfiles"
+
+# --- Homebrew packages ---
+# Install missing formulae in one pass to avoid repeated brew calls on re-runs.
+formulae=(rcm neovim tmux fzf starship zplug)
+missing=()
+for f in "${formulae[@]}"; do
+  if ! brew list "$f" &>/dev/null; then
+    missing+=("$f")
+  fi
+done
+
+if [[ ${#missing[@]} -gt 0 ]]; then
+  echo "Installing: ${missing[*]}"
+  brew install "${missing[@]}"
+fi
+
+# --- Oh-My-Zsh ---
+if [[ ! -d "$HOME/.oh-my-zsh" ]]; then
+  echo "Installing Oh-My-Zsh..."
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+fi
+
+# --- Symlink dotfiles via rcm ---
+echo "Running rcup..."
+rcup -f -v -d "$DOTFILES_DIR"
+
+# --- TPM (Tmux Plugin Manager) ---
+TPM_DIR="$HOME/.tmux/plugins/tpm"
+if [[ ! -d "$TPM_DIR" ]]; then
+  echo "Installing TPM..."
+  git clone https://github.com/tmux-plugins/tpm "$TPM_DIR"
+fi
+# Install/update tmux plugins non-interactively
+"$TPM_DIR/bin/install_plugins"
+
+echo "Setup complete."
