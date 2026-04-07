@@ -1,0 +1,26 @@
+{
+  "coc.preferences.formatOnSaveFiletypes": [
+    "javascript",
+    "typescript",
+    "javascriptreact",
+    "typescriptreact",
+    "css",
+    "scss",
+    "markdown",
+    "md",
+    "graphql",
+    "json",
+  ],
+   "diagnostic.displayByAle": true,
+   "typescript.updateImportsOnFileMove.enable": false,
+   "javascript.updateImportsOnFileMove.enable": false,
+   "suggest.maxCompleteItemCount": 10,
+   "suggest.autoTrigger": "always",
+   "suggest.noselect": true,
+   "tsserver.enableJavascript": false,
+   "solargraph.completion": false,
+   "solargraph.hover": false,
+   "solargraph.autoformat": false,
+   "solargraph.formatting": false,
+   "solargraph.diagnostics": false
+}
