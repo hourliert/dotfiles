@@ -1,0 +1,12 @@
+name: 0betfair
+root: ~/src/ex_bet_fair_pump
+
+startup_window: editor
+
+windows:
+  - server:
+      layout: even-horizontal
+      panes:
+        - ls
+  - editor: vim
+  - test:

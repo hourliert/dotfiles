@@ -1,0 +1,7 @@
+name: 0monitor
+root: ~
+
+startup_window: shell
+
+windows:
+  - shell:

@@ -1,0 +1,42 @@
+{
+  "extensions": {
+    "%2FUsers%2Fthomashourlier": [
+      "kjkj:q",
+      ":qk",
+      "ts",
+      ":q",
+      "qkj",
+      "eliDkjq",
+      "solar?",
+      ":qa"
+    ]
+  },
+  "lists": {
+    "%2FUsers%2Fthomashourlier": [
+      "extensions",
+      "commands",
+      "ex"
+    ],
+    "%2FUsers%2Fthomashourlier%2FProjects%2Fweb-apps%2Fmy-recipe-box-app": [
+      "comm",
+      "di",
+      "ex"
+    ]
+  },
+  "commands": {
+    "%2FUsers%2Fthomashourlier": [
+      "orga"
+    ],
+    "%2FUsers%2Fthomashourlier%2FProjects%2Fweb-apps%2Fmy-recipe-box-app": [
+      "organi",
+      "serlog",
+      "import",
+      "restar"
+    ]
+  },
+  "diagnostics": {
+    "%2FUsers%2Fthomashourlier%2FProjects%2Fweb-apps%2Fmy-recipe-box-app": [
+      "never"
+    ]
+  }
+}

@@ -1,0 +1,16 @@
+name: 0recipe-app
+root: ~/Projects/web-apps/my-recipe-box-app
+
+pre_window:
+  - nvm use
+
+startup_window: editor
+
+windows:
+  - server:
+      layout: even-horizontal
+      panes:
+        - yarn && yarn start
+        - git fetch
+  - editor: vim
+  - test:
