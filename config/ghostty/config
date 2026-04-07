@@ -1,0 +1,10 @@
+font-family = Fira Code
+font-style = Retina
+font-style-bold = Bold
+font-size = 16
+window-inherit-font-size = false
+maximize = true
+
+theme = Catppuccin Frappe
+
+macos-option-as-alt = left
