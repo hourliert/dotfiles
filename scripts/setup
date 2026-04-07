@@ -6,6 +6,24 @@ set -euo pipefail
 
 DOTFILES_DIR="$HOME/dotfiles"
 
+# --- Bootstrap Homebrew into PATH ---
+if [[ -f /opt/homebrew/bin/brew ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [[ -f /home/linuxbrew/.linuxbrew/bin/brew ]]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
+
+if ! command -v brew &>/dev/null; then
+  echo "Installing Homebrew..."
+  NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  # Source the freshly installed brew
+  if [[ -f /home/linuxbrew/.linuxbrew/bin/brew ]]; then
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+  elif [[ -f /opt/homebrew/bin/brew ]]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+  fi
+fi
+
 # --- Homebrew packages ---
 # Install missing formulae in one pass to avoid repeated brew calls on re-runs.
 formulae=(rcm neovim tmux fzf starship zplug)
@@ -19,6 +37,27 @@ done
 if [[ ${#missing[@]} -gt 0 ]]; then
   echo "Installing: ${missing[*]}"
   brew install "${missing[@]}"
+fi
+
+# --- Terminfo for tmux true color support ---
+if ! infocmp tmux-256color &>/dev/null 2>&1; then
+  echo "Installing tmux-256color terminfo..."
+  tic -x -e tmux-256color "$(brew --prefix)/share/terminfo/74/tmux-256color" 2>/dev/null \
+    || curl -fsSL https://invisible-island.net/datafiles/current/terminfo.src.gz \
+       | gunzip | tic -x -e tmux-256color -
+fi
+
+# --- tree-sitter CLI (compiled from source to match system glibc) ---
+if ! command -v tree-sitter &>/dev/null || ! tree-sitter --version &>/dev/null 2>&1; then
+  echo "Installing tree-sitter-cli via cargo..."
+  sudo apt-get install -y -qq libclang-dev
+  cargo install tree-sitter-cli
+fi
+
+# --- Ruby gems ---
+if ! command -v tmuxinator &>/dev/null; then
+  echo "Installing tmuxinator..."
+  gem install tmuxinator
 fi
 
 # --- Oh-My-Zsh ---
