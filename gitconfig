@@ -1,0 +1,28 @@
+[user]
+	name = Thomas Hourlier
+	email = thourlier@figma.com
+[push]
+	autoSetupRemote = true
+  default = current
+[core]
+	editor = nvim
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[alias]
+  aa = add --all
+  ap = add --patch
+	cm = commit -m
+  cv = commit -v
+  co = checkout
+  d = diff -w
+  p = push
+  pl = pull
+  s = stash
+  sa = stash -u
+  delete-merged-branches = !git branch --merged | grep -v 'master$' | xargs git branch -d
+  overview = log --all --since='1 weeks' --oneline --no-merges
+  prr = !hub pull-request
+  up = !git fetch origin && git rebase origin/master
