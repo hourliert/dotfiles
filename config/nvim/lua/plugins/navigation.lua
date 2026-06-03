@@ -21,17 +21,29 @@ return {
   },
   {
     "folke/snacks.nvim",
-    opts = {
-      picker = {
-        sources = {
-          files = { hidden = true },
-          grep = { hidden = true },
+    opts = function(_, opts)
+      local exclude = {
+        "**/.git",
+        "**/node_modules",
+        "**/dist",
+        "**/out",
+        "**/release",
+        "**/.husky",
+        "**/.turbo",
+        "**/tmp",
+        "**/.pnpm-store",
+        "**/coverage",
+      }
+      local source = { hidden = true, ignored = true, exclude = exclude }
+      return vim.tbl_deep_extend("force", opts or {}, {
+        picker = {
+          sources = {
+            files = source,
+            grep = source,
+            explorer = source,
+          },
         },
-      },
-      explorer = {
-        hidden = true,
-        ignored = true,
-      },
-    },
+      })
+    end,
   },
 }

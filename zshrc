@@ -39,6 +39,7 @@ alias vi="vim"
 alias mux="tmuxinator"
 alias msm="mux start monitor"
 alias re="reset"
+alias moshn='mosh --no-ssh-pty --server="LANG=en_US.UTF-8 /home/linuxbrew/.linuxbrew/bin/mosh-server"'
 
 # fzf: fuzzy search
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -97,6 +98,9 @@ if [[ "$(uname)" == "Linux" ]]; then
         eval "$(ssh-agent -s)" > /dev/null
     fi
 fi
+
+# GCP SDK
+export PATH=/opt/homebrew/share/google-cloud-sdk/bin:"$PATH"
 
 source ~/.secretrc
 

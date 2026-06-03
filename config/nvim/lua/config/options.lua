@@ -7,5 +7,7 @@ vim.g.maplocalleader = "\\"
 vim.g.lazyvim_ruby_lsp = "ruby_lsp"
 vim.g.lazyvim_ruby_formatter = "rubocop"
 
+vim.opt.relativenumber = false
+
 -- Python provider for molten-nvim (dedicated venv)
 vim.g.python3_host_prog = vim.fn.expand("~/.nvim-venv/bin/python")
